@@ -1,1 +1,6 @@
-<p>schedule works!</p>
+<div class='list-wrapper'>
+    <ul *ngFor='let game of games'>
+        <!-- <li *ngIf= 'game.homeTeam === "HOU" || game.awayTeam === "HOU"' >{{game.homeTeam}} vs {{game.awayTeam}}</li> -->
+        <li *ngIf='!game.isOver' >{{game.homeTeam}} vs {{game.awayTeam}} {{game.dateTime}}</li>
+    </ul>
+</div>

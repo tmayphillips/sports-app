@@ -1,0 +1,44 @@
+.main-content {
+    display: flex;
+    flex: 1 0 auto;
+    flex-wrap: nowrap;
+    justify-content: space-between;
+    overflow: hidden;
+    flex-direction: column;
+    background: #fff;
+    border-radius: 10px;
+    margin-bottom: 10px;
+    position: relative;
+    transform: translateZ(0);
+    overflow: hidden;
+}
+
+img {
+    width: 100%;
+    height: auto;
+}
+
+img-wrapper{
+    display: block;
+    height: 100%;
+    object-fit: cover;
+    object-position: 50% 0;
+    width: 100%;
+}
+
+a {
+    text-decoration: none;
+}
+
+h2 {
+    color:black;
+    padding-top: 0.4em;
+}
+
+h2:hover {
+    color:blue;
+}
+
+p {
+    color:rgb(86, 86, 86)
+}

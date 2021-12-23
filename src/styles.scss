@@ -1,1 +1,11 @@
 /* You can add global styles to this file, and also import other style files */
+.separator {
+    background-color: darkgray;
+    background-image: linear-gradient(to right, rgba(252,255,200,0) 0%, rgba(167, 167, 164, 0.48) 50%, rgba(252,255,200,0) 100%);
+    height: 3px;
+}
+
+ul {
+    list-style-type: none;
+    padding: 0;
+}

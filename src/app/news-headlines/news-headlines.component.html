@@ -1,1 +1,9 @@
-<p>news-headlines works!</p>
+<div>
+    <h3 class='header'>HEADLINES</h3>
+    <div class='separator'></div>
+    <div class='list-wrapper'>
+        <ul *ngFor='let article of articles | slice : 2'>
+            <li><a href="{{article.url}}">{{article.title}}</a></li>
+        </ul>
+    </div>
+</div>

@@ -1,15 +1,38 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { NewsService } from '../news.service';
+import { Headline } from '../headline';
 
 @Component({
-  selector: 'app-news-headlines',
+  selector: 'news-headlines',
   templateUrl: './news-headlines.component.html',
   styleUrls: ['./news-headlines.component.scss']
 })
 export class NewsHeadlinesComponent implements OnInit {
 
-  constructor() { }
+  @Input() query:string = ''
+  @Output() newsEvent = new EventEmitter<Headline>()
+
+  constructor(private newsService:NewsService) { }
+
+  articles: Array<Headline> = []
+  count:number = 1
 
   ngOnInit(): void {
+    this.getNews(this.query)
+   
+  }
+
+  getNews(query:string) {
+    this.newsService
+      .getNewsQuery(query)
+      .then((resp:any) => {
+        this.articles.push(...resp.articles);
+        this.sendNewsItem()
+      })
+  }
+
+  sendNewsItem() {
+    this.newsEvent.emit(this.articles[1])
   }
 
 }
