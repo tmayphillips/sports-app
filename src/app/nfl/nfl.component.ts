@@ -32,8 +32,8 @@ export class NflComponent implements OnInit {
 
   
 
-  getHeadline($event:Headline) {
-    this.headline = $event
+  getHeadline(headline:Headline) {
+    this.headline = headline
   }
 
 }

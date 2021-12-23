@@ -4,23 +4,31 @@
         <div class="col-9 ">
             <section class = 'main-content'>
                 <news-headlines [style.display]="'none'" [query]="sportQuery" (newsEvent)="getHeadline($event)"></news-headlines>
-                <a href="{{headline.url}}">
-                    <div class='img-wrapper'>
-                        <img src={{headline.urlToImage}} /> 
-                    </div>
-                    <div class='separator'></div>
-                    <div class='title-wrapper'>
-                        <h2>{{headline.title}}</h2>
-                        <p>{{headline.description}}</p>
-                    </div>
-                </a>
-                <schedule [sport]="sportQuery"></schedule>
-                <team></team>
+                <div class='headline-wrapper'>
+                    <a href="{{headline.url}}">
+                        <div class='img-wrapper'>
+                            <img src={{headline.urlToImage}} /> 
+                        </div>
+                        <div class='separator'></div>
+                        <div class='title-wrapper'>
+                            <h2>{{headline.title}}</h2>
+                            <p>{{headline.description}}</p>
+                        </div>
+                    </a>
+                </div>
+                <div class='schedule-wrapper'>
+                    <schedule [sport]="sportQuery"></schedule>
+                </div>
+                
+               
             </section>
         </div>
         
         <div class="col-3">
-            <news-headlines [query]="sportQuery"></news-headlines>
+            <div class='headlines-wrapper'>
+                <news-headlines [query]="sportQuery"></news-headlines>
+            </div>
         </div>
+        
     </div>
 </div>

@@ -8,7 +8,7 @@ import { Team } from '../team';
   styleUrls: ['./team.component.scss']
 })
 export class TeamComponent implements OnInit {
-  @Output() newsEvent = new EventEmitter<Team>()
+  @Output() teamsEvent = new EventEmitter<Team[]>()
   rawTeamsArr:string[] = []
   teams:Team[] = []
   constructor(private scheduleService:ScheduleService) { }
@@ -22,7 +22,6 @@ export class TeamComponent implements OnInit {
       .getNflTeams()
       .then((resp:any) => {
         this.rawTeamsArr.push(...resp);
-        console.log(this.rawTeamsArr)
         this.createTeamsArr()
       })
   }
@@ -46,11 +45,11 @@ export class TeamComponent implements OnInit {
       }
       this.teams.push(team)
     }
-    console.log(this.teams)
+    this.sendTeamsInfo()
   }
 
-  // sendTeamsInfo() {
-  //   this.newsEvent.emit(this.teams)
-  // }
+  sendTeamsInfo() {
+    this.teamsEvent.emit(this.teams)
+  }
 
 }

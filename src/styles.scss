@@ -1,4 +1,8 @@
 /* You can add global styles to this file, and also import other style files */
+body {
+    background-color: #f8f9fa !important
+}
+
 .separator {
     background-color: darkgray;
     background-image: linear-gradient(to right, rgba(252,255,200,0) 0%, rgba(167, 167, 164, 0.48) 50%, rgba(252,255,200,0) 100%);

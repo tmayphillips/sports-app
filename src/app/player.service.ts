@@ -13,9 +13,6 @@ export class PlayerService {
   nflPlayersUrl = `https://api.sportsdata.io/v3/nfl/scores/json/Players?key=${this.NFL_API_KEY}`
   mlbPlayersUrl = `https://api.sportsdata.io/v3/mlb/scores/json/Players?key=${this.MLB_API_KEY}`
   nbaPlayersUrl = `https://api.sportsdata.io/v3/nba/scores/json/Players?key=${this.NBA_API_KEY}`
-  nflCurrentUrl = `https://api.sportsdata.io/v3/nfl/scores/json/Current`
-  mlbCurrentUrl = `https://api.sportsdata.io/v3/mlb/scores/json/CurrentSeason`
-  nbaCurrentUrl = `https://api.sportsdata.io/v3/nba/scores/json/CurrentSeason`
   nflStatsUrl = `https://api.sportsdata.io/v3/nfl/stats/json/PlayerGameStatsBySeason/`
   mlbStatsUrl = `https://api.sportsdata.io/v3/mlb/stats/json/PlayerGameStatsBySeason/`
   nbaStatsUrl = `https://api.sportsdata.io/v3/nba/stats/json/PlayerGameStatsBySeason/`
@@ -57,44 +54,7 @@ export class PlayerService {
         )
     })
   }
-
-  public getNflCurrent(currentTimeframe:string) {
-    this.timeframe = currentTimeframe;
-    return new Promise((resolve,reject) => {
-        this.http.get(`${this.nflCurrentUrl}${this.timeframe}?key=${this.NFL_API_KEY}`).subscribe(
-            (res) => {
-                resolve(res);
-            }, (err) => {
-                reject(err)
-            }
-        )
-    })
-  }
-
-  public getMlbCurrent() {
-    return new Promise((resolve,reject) => {
-        this.http.get(`${this.mlbCurrentUrl}?key=${this.MLB_API_KEY}`).subscribe(
-            (res) => {
-                resolve(res);
-            }, (err) => {
-                reject(err)
-            }
-        )
-    })
-  }
-
-  public getNbaCurrent() {
-    return new Promise((resolve,reject) => {
-        this.http.get(`${this.nbaCurrentUrl}?key=${this.NBA_API_KEY}`).subscribe(
-            (res) => {
-                resolve(res);
-            }, (err) => {
-                reject(err)
-            }
-        )
-    })
-  }
-
+  
   public getNflPlayerStats(season:number, id:number) {
     return new Promise((resolve,reject) => {
         this.http.get(`${this.nflStatsUrl}/${season}/${id}/all?key=${this.NFL_API_KEY}`).subscribe(

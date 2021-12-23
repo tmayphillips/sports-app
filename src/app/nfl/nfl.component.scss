@@ -5,12 +5,36 @@
     justify-content: space-between;
     overflow: hidden;
     flex-direction: column;
-    background: #fff;
     border-radius: 10px;
     margin-bottom: 10px;
     position: relative;
     transform: translateZ(0);
     overflow: hidden;
+}
+
+.headline-wrapper  {
+    background-color: white;
+    border-radius: 10px;
+    box-shadow: 0px 2px 2px lightgray;
+    margin-bottom: 10px;
+}
+
+.schedule-wrapper {
+    background-color: white;
+    border-radius: 10px;
+    box-shadow: 0px 2px 2px lightgray;
+    margin-bottom: 10px;
+}
+
+.headlines-wrapper {
+    background-color: white;
+    border-radius: 10px;
+    box-shadow: 0px 2px 2px lightgray;
+    margin-bottom: 10px;
+}
+
+.title-wrapper {
+    padding: 5px;
 }
 
 img {
