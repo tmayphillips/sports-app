@@ -16,8 +16,33 @@
                         </div>
                     </a>
                 </div>
+                <schedule [style.display]="'none'" [sport]="sportQuery" (gamesEvent)="getGames($event)"></schedule>
                 <div class='schedule-wrapper'>
-                    <schedule [sport]="sportQuery"></schedule>
+                    <ul *ngFor='let game of games'>
+                        <!-- <li *ngIf= 'game.homeTeam === "HOU" || game.awayTeam === "HOU"' >{{game.homeTeam}} vs {{game.awayTeam}}</li> -->
+                        
+                        <li *ngIf='!game.isOver'>
+                            <div class='row-wrapper'>
+                                <div class='team-wrapper'>
+                                    <img class='logo-sm' src={{game.homeImg}}> <h5>{{game.homeTeam}}</h5>
+                                </div>
+                                <div class='game-info'>
+                                    <p>{{game.day}}</p>
+                                    <p>{{game.longDate.toLocaleTimeString("en-US", { hour: '2-digit', minute: '2-digit' })}} ET</p>
+                                </div>
+                            </div>
+                            <div class='row-wrapper'>
+                                <div class='team-wrapper'>
+                                    <img class='logo-sm' src={{game.awayImg}}> <h5>{{game.awayTeam}} </h5> 
+                                </div>
+                                <div class='game-info'>
+                                    <p>{{game.channel}}</p>
+                                    <p>{{game.forecastDescription}}</p>
+                                </div>
+                            </div>
+                            <div class='separator'></div>
+                        </li>
+                    </ul>
                 </div>
                 
                

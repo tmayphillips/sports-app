@@ -1,5 +1,6 @@
-import { Component, OnInit, AfterViewInit, ViewChild } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Headline } from '../headline';
+import { Game } from '../game';
 import { NewsHeadlinesComponent } from '../news-headlines/news-headlines.component';
 
 @Component({
@@ -10,6 +11,7 @@ import { NewsHeadlinesComponent } from '../news-headlines/news-headlines.compone
 export class NflComponent implements OnInit {
   sportQuery = 'nfl'
   headline:any = {}
+  games:Game[] = []
   // @ViewChild(NewsHeadlinesComponent) child!:NewsHeadlinesComponent
 
   // @ViewChild(NewsHeadlinesComponent)
@@ -34,6 +36,11 @@ export class NflComponent implements OnInit {
 
   getHeadline(headline:Headline) {
     this.headline = headline
+  }
+
+  getGames(games:Game[]) {
+    this.games = games
+    console.log('games', this.games)
   }
 
 }

@@ -1,3 +1,7 @@
+body{
+    margin: 0 !important;
+}
+
 .main-content {
     display: flex;
     flex: 1 0 auto;
@@ -24,6 +28,26 @@
     border-radius: 10px;
     box-shadow: 0px 2px 2px lightgray;
     margin-bottom: 10px;
+
+}
+
+.row-wrapper {
+    display:flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.team-wrapper {
+    display: flex;
+    padding: 5px;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+.team-wrapper h5 {
+  margin: 0;
+ 
+    
 }
 
 .headlines-wrapper {
@@ -42,7 +66,7 @@ img {
     height: auto;
 }
 
-img-wrapper{
+.img-wrapper{
     display: block;
     height: 100%;
     object-fit: cover;
@@ -64,5 +88,27 @@ h2:hover {
 }
 
 p {
-    color:rgb(86, 86, 86)
+    color:rgb(86, 86, 86);
+    margin: 0;
+}
+
+li p {
+    color:rgb(86, 86, 86);
+    margin: 0;
+    font-size: 12px;
+}
+
+
+ul {
+    margin: 0;
+    padding-right: 32px;
+}
+
+.logo-sm {
+    height: 30px;
+    width: 50px;
+}
+
+.game-info {
+    text-align: right;
 }

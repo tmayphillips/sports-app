@@ -4,6 +4,7 @@ export interface Game {
     season:number,
     week:number,
     awayScore:number,
+    awayTeamAbbr:string,
     awayTeam:string,
     awayTeamID:string,
     awayImg:string,
@@ -13,6 +14,7 @@ export interface Game {
     day:string,
     month:string,
     homeScore:number,
+    homeTeamAbbr:string,
     homeTeam:string,
     homeTeamID:string,
     homeImg:string,
@@ -20,5 +22,7 @@ export interface Game {
     stadiumCity:string,
     hasStarted:boolean,
     isInProgress:boolean,
-    isOver:boolean
+    isOver:boolean,
+    channel:string,
+    forecastDescription:string
 }

@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { ScheduleService } from '../schedule.service';
 import { Game } from '../game';
 import { Team } from '../team';
@@ -10,6 +10,7 @@ import { Team } from '../team';
 })
 export class ScheduleComponent implements OnInit {
   @Input() sport:string = ''
+  @Output() gamesEvent = new EventEmitter<Game[]>()
   constructor(private scheduleService:ScheduleService) { }
   season:string = ''
   schedule:string[] = []
@@ -46,6 +47,7 @@ export class ScheduleComponent implements OnInit {
 
   getScoresArray() {
     let scheduleArray:any = this.schedule
+    console.log(this.schedule)
     console.log("teams", this.teams)
     for (let gameObj of scheduleArray) {
       let game:Game = { 
@@ -56,11 +58,13 @@ export class ScheduleComponent implements OnInit {
         date: new Date(gameObj.DateTime).getDate(),
         day: this.weekday[new Date(gameObj.DateTime).getDay()],
         month: this.monthNames[new Date(gameObj.DateTime).getMonth()],
-        homeTeam: gameObj.HomeTeam,
+        homeTeamAbbr: gameObj.HomeTeam,
+        homeTeam: this.teams[this.teams.findIndex(x => x.teamID === gameObj.HomeTeamID )].name,
         homeTeamID: gameObj.HomeTeamID,
         homeScore: gameObj.HomeScore,
         homeImg: this.teams[this.teams.findIndex(x => x.teamID === gameObj.HomeTeamID )].wikipediaLogoUrl,
-        awayTeam: gameObj.AwayTeam,
+        awayTeamAbbr: gameObj.AwayTeam,
+        awayTeam: this.teams[this.teams.findIndex(x => x.teamID === gameObj.AwayTeamID )].name,
         awayScore: gameObj.AwayScore,
         awayTeamID: gameObj.AwayTeamID,
         awayImg: this.teams[this.teams.findIndex(x => x.teamID === gameObj.AwayTeamID )].wikipediaLogoUrl,
@@ -68,19 +72,23 @@ export class ScheduleComponent implements OnInit {
         isInProgress: gameObj.IsInProgress,
         isOver: gameObj.IsOver,
         stadium: gameObj.StadiumDetails.Name, 
-        stadiumCity: gameObj.StadiumDetails.City
-
+        stadiumCity: gameObj.StadiumDetails.City,
+        channel: gameObj.Channel,
+        forecastDescription: gameObj.ForecastDescription
       }
       this.games.push(game)
   
     }
-    console.log(this.games)
+    this.sendGameList()
   }
 
   getTeamInfo(teams:Team[]) {
     this.teams = teams
     console.log(this.teams)
   }
-
+  
+  sendGameList() {
+    this.gamesEvent.emit(this.games)
+  }
 
 }
