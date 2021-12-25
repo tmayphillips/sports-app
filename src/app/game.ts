@@ -8,6 +8,8 @@ export interface Game {
     awayTeam:string,
     awayTeamID:string,
     awayImg:string,
+    awayWins:number,
+    awayLosses:number
     dateTime:string,
     longDate:Date,
     date:number,
@@ -18,6 +20,8 @@ export interface Game {
     homeTeam:string,
     homeTeamID:string,
     homeImg:string,
+    homeWins:number,
+    homeLosses:number
     stadium:string,
     stadiumCity:string,
     hasStarted:boolean,

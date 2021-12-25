@@ -10,5 +10,16 @@ export interface Team {
     primaryColor:string,
     secondaryColor:string,
     wikipediaLogoUrl:string,
-    wikipediaWordMarkUrl:string
+    wikipediaWordMarkUrl:string,
+    wins:number, 
+    losses:number,
+    ties:number
+    conferenceRank:number,
+    conferenceWins:number,
+    conferenceLosses:number,
+    conferenceTies:number,
+    divisionRank:number
+    divisionWins:number,
+    divisionLosses:number,
+    divisionTies:number
 }

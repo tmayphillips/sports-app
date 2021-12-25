@@ -6,10 +6,12 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./standings.component.scss']
 })
 export class StandingsComponent implements OnInit {
+  rawStandingsArr:string[] = []
 
   constructor() { }
 
   ngOnInit(): void {
   }
 
+  
 }

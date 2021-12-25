@@ -46,8 +46,6 @@ body{
 
 .team-wrapper h5 {
   margin: 0;
- 
-    
 }
 
 .headlines-wrapper {
@@ -95,13 +93,20 @@ p {
 li p {
     color:rgb(86, 86, 86);
     margin: 0;
-    font-size: 12px;
+    font-size: 13px;
 }
 
+li h5 {
+    padding-left: 10px;
+}
 
 ul {
-    margin: 0;
     padding-right: 32px;
+    margin-top: 10px;
+}
+
+.schedule-wrapper .separator {
+    margin-top: 10px;
 }
 
 .logo-sm {
@@ -111,4 +116,8 @@ ul {
 
 .game-info {
     text-align: right;
+}
+
+.wins-losses {
+    padding-left: 10px;
 }

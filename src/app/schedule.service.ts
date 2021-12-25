@@ -13,6 +13,7 @@ export class ScheduleService {
   mlbScheduleUrl = `https://api.sportsdata.io/v3/mlb/scores/json/Scores/`
   nbaScheduleUrl = `https://api.sportsdata.io/v3/nba/scores/json/Scores/`
   nflTeamsUrl = `https://api.sportsdata.io/v3/nfl/scores/json/Teams`
+  nflStandingsUrl = `https://api.sportsdata.io/v3/nfl/scores/json/Standings/`
   NFL_API_KEY = '72b3ff18e83e404bb5b7c04990249801';
   NBA_API_KEY = '13a658de98874317a0ee4749c2f34d41'
   MLB_API_KEY = '782d2e12bb5c46fe934b8b5a908ce7a4'
@@ -100,7 +101,19 @@ export class ScheduleService {
 
   public getNflTeams() {
     return new Promise((resolve,reject) => {
-        this.http.get(`${this.nflTeamsUrl}?key=${this.NFL_API_KEY}`).subscribe(
+        this.http.get(`${this.nflTeamsUrl}${this.season}?key=${this.NFL_API_KEY}`).subscribe(
+            (res) => {
+                resolve(res);
+            }, (err) => {
+                reject(err)
+            }
+        )
+    })
+  }
+
+  public getNflStandings() {
+    return new Promise((resolve,reject) => {
+        this.http.get(`${this.nflStandingsUrl}${this.season}?key=${this.NFL_API_KEY}`).subscribe(
             (res) => {
                 resolve(res);
             }, (err) => {

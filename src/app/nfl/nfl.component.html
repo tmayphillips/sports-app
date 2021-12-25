@@ -24,7 +24,9 @@
                         <li *ngIf='!game.isOver'>
                             <div class='row-wrapper'>
                                 <div class='team-wrapper'>
-                                    <img class='logo-sm' src={{game.homeImg}}> <h5>{{game.homeTeam}}</h5>
+                                    <img class='logo-sm' src={{game.homeImg}}> 
+                                    <h5>{{game.homeTeam}}</h5>
+                                    <p class='wins-losses'>({{game.homeWins}} - {{game.homeLosses}})</p>
                                 </div>
                                 <div class='game-info'>
                                     <p>{{game.day}}</p>
@@ -33,7 +35,9 @@
                             </div>
                             <div class='row-wrapper'>
                                 <div class='team-wrapper'>
-                                    <img class='logo-sm' src={{game.awayImg}}> <h5>{{game.awayTeam}} </h5> 
+                                    <img class='logo-sm' src={{game.awayImg}}> 
+                                    <h5>{{game.awayTeam}} </h5> 
+                                    <p class='wins-losses'>({{game.awayWins}} - {{game.awayLosses}})</p>
                                 </div>
                                 <div class='game-info'>
                                     <p>{{game.channel}}</p>
