@@ -18,6 +18,7 @@
                 </div>
                 <schedule [style.display]="'none'" [sport]="sportQuery" (gamesEvent)="getGames($event)"></schedule>
                 <div class='schedule-wrapper'>
+                    <h3>Upcoming Schedule</h3>
                     <ul *ngFor='let game of games'>
                         <!-- <li *ngIf= 'game.homeTeam === "HOU" || game.awayTeam === "HOU"' >{{game.homeTeam}} vs {{game.awayTeam}}</li> -->
                         
@@ -25,8 +26,11 @@
                             <div class='row-wrapper'>
                                 <div class='team-wrapper'>
                                     <img class='logo-sm' src={{game.homeImg}}> 
-                                    <h5>{{game.homeTeam}}</h5>
+                                    <a [routerLink]="['/team', game.homeTeamID, game.homeTeam]"><h5>{{game.homeTeam}}</h5></a>
                                     <p class='wins-losses'>({{game.homeWins}} - {{game.homeLosses}})</p>
+                                </div>
+                                <div *ngIf='game.isInProgress' class='score'>
+                                    <p>{{game.homeScore}}</p>
                                 </div>
                                 <div class='game-info'>
                                     <p>{{game.day}}</p>
@@ -36,8 +40,11 @@
                             <div class='row-wrapper'>
                                 <div class='team-wrapper'>
                                     <img class='logo-sm' src={{game.awayImg}}> 
-                                    <h5>{{game.awayTeam}} </h5> 
+                                    <a [routerLink]="['/team', game.awayTeamID, game.awayTeam]"><h5>{{game.awayTeam}} </h5> </a>
                                     <p class='wins-losses'>({{game.awayWins}} - {{game.awayLosses}})</p>
+                                </div>
+                                <div *ngIf='game.isInProgress' class='score'>
+                                    <p>{{game.awayScore}}</p>
                                 </div>
                                 <div class='game-info'>
                                     <p>{{game.channel}}</p>

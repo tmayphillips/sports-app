@@ -40,7 +40,6 @@ export class NflComponent implements OnInit {
 
   getGames(games:Game[]) {
     this.games = games
-    console.log('games', this.games)
   }
 
 }

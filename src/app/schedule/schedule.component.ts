@@ -18,6 +18,8 @@ export class ScheduleComponent implements OnInit {
   unfinishedGames:Game[] = []
   games:Game[] = []
   teams:Team[] = []
+  rawTeamsArr:string[] = []
+  rawStandingsArr:any[] = []
   weekday:string[] = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday']
   monthNames:string[] = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"]
 
@@ -41,14 +43,67 @@ export class ScheduleComponent implements OnInit {
       .getNflSchedule(season)
       .then((resp:any) => {
         this.schedule.push(...resp);
-        this.getScoresArray()
+        this.getTeams()
       })
+  }
+
+  getTeams() {
+    this.scheduleService
+      .getNflTeams()
+      .then((resp:any) => {
+        this.rawTeamsArr.push(...resp);
+        console.log('rawTeamsArr', this.rawTeamsArr)
+        this.getStandings()
+      })
+  }
+  
+  getStandings() {
+    this.scheduleService
+      .getNflStandings(this.season)
+      .then((resp:any) => {
+        this.rawStandingsArr.push(...resp);
+        this.createTeamsArr()
+      })
+  }
+  
+  createTeamsArr() {
+    let teamsArray:any = this.rawTeamsArr
+    for (let teamObj of teamsArray) {
+      let team:Team = {
+        key: teamObj.Key,
+        teamID: teamObj.TeamID,
+        city: teamObj.City,
+        name: teamObj.Name,
+        conference: teamObj.Conference,
+        division: teamObj.Division,
+        wins: this.rawStandingsArr[this.rawStandingsArr.findIndex(x => x.TeamID === teamObj.TeamID )].Wins,
+        losses: this.rawStandingsArr[this.rawStandingsArr.findIndex(x => x.TeamID === teamObj.TeamID )].Losses,
+        ties: this.rawStandingsArr[this.rawStandingsArr.findIndex(x => x.TeamID === teamObj.TeamID )].Ties,
+        conferenceRank: this.rawStandingsArr[this.rawStandingsArr.findIndex(x => x.TeamID === teamObj.TeamID )].ConferenceRank,
+        conferenceWins: this.rawStandingsArr[this.rawStandingsArr.findIndex(x => x.TeamID === teamObj.TeamID )].ConferenceWins,
+        conferenceLosses: this.rawStandingsArr[this.rawStandingsArr.findIndex(x => x.TeamID === teamObj.TeamID )].ConferenceLosses,
+        conferenceTies: this.rawStandingsArr[this.rawStandingsArr.findIndex(x => x.TeamID === teamObj.TeamID )].ConferenceTies,
+        divisionRank: this.rawStandingsArr[this.rawStandingsArr.findIndex(x => x.TeamID === teamObj.TeamID )].DivisionRank,
+        divisionWins: this.rawStandingsArr[this.rawStandingsArr.findIndex(x => x.TeamID === teamObj.TeamID )].DivisionWins,
+        divisionLosses: this.rawStandingsArr[this.rawStandingsArr.findIndex(x => x.TeamID === teamObj.TeamID )].DivisionLosses,
+        divisionTies: this.rawStandingsArr[this.rawStandingsArr.findIndex(x => x.TeamID === teamObj.TeamID )].DivisionTies,
+        fullName: teamObj.FullName,
+        stadiumID: teamObj.StadiumID,
+        primaryColor: teamObj.PrimaryColor,
+        secondaryColor: teamObj.SecondaryColor,
+        wikipediaLogoUrl: teamObj.WikipediaLogoUrl,
+        wikipediaWordMarkUrl: teamObj.WikipediaWordMarkUrl
+      }
+      this.teams.push(team)
+    }
+    console.log('teams', this.teams)
+    this.getScoresArray()
   }
 
   getScoresArray() {
     let scheduleArray:any = this.schedule
-    console.log(this.schedule)
-    console.log("teams", this.teams)
+    console.log('scheduleArr', scheduleArray)
+    console.log('teams', this.teams)
     for (let gameObj of scheduleArray) {
       let game:Game = { 
         season: gameObj.Season,
@@ -88,7 +143,6 @@ export class ScheduleComponent implements OnInit {
 
   getTeamInfo(teams:Team[]) {
     this.teams = teams
-    console.log(this.teams)
   }
   
   sendGameList() {

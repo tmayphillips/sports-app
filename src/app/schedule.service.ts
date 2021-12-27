@@ -100,8 +100,9 @@ export class ScheduleService {
   }
 
   public getNflTeams() {
+    console.log(`${this.nflTeamsUrl}?key=${this.NFL_API_KEY}`)
     return new Promise((resolve,reject) => {
-        this.http.get(`${this.nflTeamsUrl}${this.season}?key=${this.NFL_API_KEY}`).subscribe(
+        this.http.get(`${this.nflTeamsUrl}?key=${this.NFL_API_KEY}`).subscribe(
             (res) => {
                 resolve(res);
             }, (err) => {
@@ -111,9 +112,9 @@ export class ScheduleService {
     })
   }
 
-  public getNflStandings() {
+  public getNflStandings(season:string) {
     return new Promise((resolve,reject) => {
-        this.http.get(`${this.nflStandingsUrl}${this.season}?key=${this.NFL_API_KEY}`).subscribe(
+        this.http.get(`${this.nflStandingsUrl}${season}?key=${this.NFL_API_KEY}`).subscribe(
             (res) => {
                 resolve(res);
             }, (err) => {

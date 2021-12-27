@@ -1,4 +1,5 @@
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
+import { Router, ActivatedRoute, ParamMap } from '@angular/router';
 import { ScheduleService } from '../schedule.service';
 import { Team } from '../team';
 
@@ -12,12 +13,38 @@ export class TeamComponent implements OnInit {
   rawTeamsArr:string[] = []
   rawStandingsArr:any[] = []
   teams:Team[] = []
+  teamID:string | null = '0'
+  sport:string = 'nfl'
+  teamQuery:string | null = 'sport'
+  season:string = ''
+  
   constructor(
+    private route: ActivatedRoute,
     private scheduleService:ScheduleService
     ) { }
 
   ngOnInit(): void {
-    this.getTeams()
+    this.teamID = this.route.snapshot.paramMap.get('teamID')
+    this.teamQuery = this.route.snapshot.paramMap.get('teamName')
+    // this.route.queryParams.subscribe(params => {
+    //   this.teamID = params['teamID']
+    //   this.teamQuery = params['teamName'];
+    // });
+    this.getCurrentSeason(this.sport)
+    console.log(this.teamID)
+    console.log(this.teamQuery)
+  }
+
+  getCurrentSeason(sport:string) {
+    if(sport==='nfl') {
+      this.scheduleService
+      .getNflCurrent('Season')
+      .then((resp:any) => {
+        this.season = resp
+        console.log('season', this.season)
+        this.getTeams()
+      })
+    }
   }
 
   getTeams() {
@@ -25,18 +52,17 @@ export class TeamComponent implements OnInit {
       .getNflTeams()
       .then((resp:any) => {
         this.rawTeamsArr.push(...resp);
+        console.log('rawTeamsArr', this.rawTeamsArr)
         this.getStandings()
-        console.log(this.rawTeamsArr)
       })
   }
   
   getStandings() {
     this.scheduleService
-      .getNflStandings()
+      .getNflStandings(this.season)
       .then((resp:any) => {
         this.rawStandingsArr.push(...resp);
         this.createTeamsArr()
-        console.log(this.rawStandingsArr)
       })
   }
   
@@ -70,12 +96,11 @@ export class TeamComponent implements OnInit {
       }
       this.teams.push(team)
     }
-    console.log(this.teams)
+    console.log('teams', this.teams)
     this.sendTeamsInfo()
   }
 
   sendTeamsInfo() {
     this.teamsEvent.emit(this.teams)
   }
-
 }

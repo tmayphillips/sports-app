@@ -1,1 +1,18 @@
-<p>team works!</p>
+<div class="container">
+    <div class="row ">
+        
+        <div class="col-9 ">
+            <section class = 'main-content'>
+                <div>
+                    <img class='word-mark' src={{teams[teamID].wikipediaWordMarkUrl}} >
+                </div>
+            </section>
+        </div>
+
+        <div class="col-3">
+            <div class='headlines-wrapper'>
+                <news-headlines [query]="teamQuery"></news-headlines>
+            </div>
+        </div>
+    </div>
+</div>
