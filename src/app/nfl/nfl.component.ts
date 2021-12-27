@@ -1,7 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { Headline } from '../headline';
 import { Game } from '../game';
+import { Router, ActivatedRoute, NavigationEnd } from '@angular/router';
 import { NewsHeadlinesComponent } from '../news-headlines/news-headlines.component';
+import { filter } from 'rxjs';
+import { ScheduleComponent } from '../schedule/schedule.component';
 
 @Component({
   selector: 'nfl',
@@ -9,33 +12,56 @@ import { NewsHeadlinesComponent } from '../news-headlines/news-headlines.compone
   styleUrls: ['./nfl.component.scss']
 })
 export class NflComponent implements OnInit {
-  sportQuery = 'nfl'
+  @ViewChild (NewsHeadlinesComponent) childNewsHeadlines!:NewsHeadlinesComponent
+  @ViewChild (ScheduleComponent) childSchedule!:ScheduleComponent
+
+  sportQuery:string | null = ''
+  articles: Array<Headline> = []
   headline:any = {}
   games:Game[] = []
-  // @ViewChild(NewsHeadlinesComponent) child!:NewsHeadlinesComponent
+  sport:string | null = ''
 
-  // @ViewChild(NewsHeadlinesComponent)
-  //      private child = {} as NewsHeadlinesComponent;
+  constructor(
+    private router: Router,
+    private route: ActivatedRoute
+    ) { }
 
-  constructor() { 
+  ngAfterViewInit() {
+    console.log('ngAfter sport', this.sport)
+    // this.childNewsHeadlines.getNews(this.sport)
+    // this.childSchedule.getCurrent(this.sport)
   }
 
-  ngOnInit(
-  ): void {
-    
-    // this.child.sendNewsItem()
+  ngOnChange(): void {
+    console.log('onChange')
   }
 
-  // ngAfterViewInit() {
-  //   // child is set
-  //   this.headline = this.child.getNews('nfl')
-  //   console.log(this.headline)
-  // }
+  ngOnInit(): void {
+    // this.router.routeReuseStrategy.shouldReuseRoute = () => false;
+    this.sport = this.route.snapshot.paramMap.get('sport')
+    this.sportQuery = this.sport
+    console.log('sport page: ')
 
-  
+    this.router.events.pipe(filter(event => event instanceof NavigationEnd)).subscribe(
+      () => {
+        this.sport = this.route.snapshot.paramMap.get('sport')
+        this.sportQuery = this.sport
+        console.log('router event', this.sport)
+        this.childNewsHeadlines.getNews(this.sport)
+        this.childSchedule.getCurrent(this.sport)
+      }
+    )
+  }
 
-  getHeadline(headline:Headline) {
-    this.headline = headline
+  getHeadline(articles:Headline[]) {
+    console.log('headline', articles)
+    this.headline = articles[1]
+    this.articles = articles
+  }
+
+  getArticles(articles:Headline[]) {
+    console.log('articles', articles)
+    this.articles = articles
   }
 
   getGames(games:Game[]) {

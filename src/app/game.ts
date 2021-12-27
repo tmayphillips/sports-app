@@ -21,12 +21,9 @@ export interface Game {
     homeTeamID:string,
     homeImg:string,
     homeWins:number,
-    homeLosses:number
-    stadium:string,
-    stadiumCity:string,
+    homeLosses:number,
     hasStarted:boolean,
     isInProgress:boolean,
     isOver:boolean,
-    channel:string,
-    forecastDescription:string
+    channel:string
 }

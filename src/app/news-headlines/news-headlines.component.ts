@@ -1,6 +1,8 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Router, ActivatedRoute, NavigationEnd } from '@angular/router';
 import { NewsService } from '../news.service';
 import { Headline } from '../headline';
+import { filter } from 'rxjs';
 
 @Component({
   selector: 'news-headlines',
@@ -9,32 +11,45 @@ import { Headline } from '../headline';
 })
 export class NewsHeadlinesComponent implements OnInit {
 
-  @Input() query:string = ''
-  @Output() newsEvent = new EventEmitter<Headline>()
+  @Input() query:string | null = ''
+  @Output() newsEvent = new EventEmitter<Headline[]>()
   @Output() articlesEvent = new EventEmitter<Headline[]>()
 
-  constructor(private newsService:NewsService) { }
+  constructor(
+    private router: Router,
+    private newsService:NewsService
+  ) { }
 
   articles: Array<Headline> = []
   count:number = 1
 
   ngOnInit(): void {
     this.getNews(this.query)
-   
+
+    // this.router.events.pipe(filter(event => event instanceof NavigationEnd)).subscribe(
+    //   () => {
+    //     this.getNews(this.query)
+    //   }
+    // )
   }
 
-  getNews(query:string) {
+  ngOnChange(): void {
+    console.log('onChange')
+  }
+
+  getNews(query:string | null) {
+    this.articles = []
     this.newsService
       .getNewsQuery(query)
       .then((resp:any) => {
-        this.articles.push(...resp.articles);
+        this.articles = resp.articles;
         this.sendNewsItem()
         this.sendArticles()
       })
   }
 
   sendNewsItem() {
-    this.newsEvent.emit(this.articles[1])
+    this.newsEvent.emit(this.articles)
   }
 
   sendArticles() {

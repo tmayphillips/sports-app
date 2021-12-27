@@ -125,3 +125,36 @@ ul {
 .wins-losses {
     padding-left: 10px;
 }
+
+.headlines-wrapper a {
+    text-decoration: none;
+    color:black;
+}
+
+.headlines-wrapper a:hover {
+    color:blue;
+}
+
+.headlines-wrapper .header {
+    padding-top: 10px;
+    text-align: center;
+}
+
+.headlines-wrapper ul {
+    font-size: 12px;
+    padding: 5px;
+    margin: 0 5px;
+}
+
+.headlines-wrapper .separator {
+    margin-bottom: 1em;
+    margin: 0 15px;
+}
+
+.headlines-wrapper .limit {
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    margin: 0;
+  }

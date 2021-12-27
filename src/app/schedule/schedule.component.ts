@@ -12,7 +12,7 @@ export class ScheduleComponent implements OnInit {
   @Input() sport:string = ''
   @Output() gamesEvent = new EventEmitter<Game[]>()
   constructor(private scheduleService:ScheduleService) { }
-  season:string = ''
+  season:string|{} = ''
   schedule:string[] = []
   date:string = ''
   unfinishedGames:Game[] = []
@@ -24,50 +24,66 @@ export class ScheduleComponent implements OnInit {
   monthNames:string[] = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"]
 
   ngOnInit(): void {
-    this.getCurrentSeason(this.sport)
+    this.getCurrent(this.sport)
   }
 
-  getCurrentSeason(sport:string) {
-    if(sport==='nfl') {
+  getCurrent(sport:string|null) {
+      this.season = ''
+      console.log(sport)
       this.scheduleService
-      .getNflCurrent('Season')
+      .getCurrent(sport)
       .then((resp:any) => {
+        console.log(resp)
         this.season = resp
-        this.getScheduleArray(this.season)
+        console.log(this.season)
+        this.getScheduleArray(this.sport, this.season)
       })
-    }
   }
 
-  getScheduleArray(season:string) {
+  // getCurrentSeason(sport:string|null) {
+  //   if(sport==='nfl') {
+  //     this.scheduleService
+  //     .getNflCurrent('Season')
+  //     .then((resp:any) => {
+  //       this.season = resp
+  //       this.getScheduleArray(this.season)
+  //     })
+  //   }
+  // }
+
+  getScheduleArray(sport:string|null, season:string|{}) {
     this.scheduleService
-      .getNflSchedule(season)
+      .getSchedule(this.sport, season)
       .then((resp:any) => {
-        this.schedule.push(...resp);
+        console.log(resp)
+        this.schedule= resp;
         this.getTeams()
       })
   }
 
   getTeams() {
+    this.rawTeamsArr = []
     this.scheduleService
-      .getNflTeams()
+      .getTeams(this.sport)
       .then((resp:any) => {
-        this.rawTeamsArr.push(...resp);
-        console.log('rawTeamsArr', this.rawTeamsArr)
+        this.rawTeamsArr = resp;
         this.getStandings()
       })
   }
   
   getStandings() {
+    this.rawStandingsArr = []
     this.scheduleService
-      .getNflStandings(this.season)
+      .getStandings(this.sport, this.season)
       .then((resp:any) => {
-        this.rawStandingsArr.push(...resp);
+        this.rawStandingsArr = resp;
         this.createTeamsArr()
       })
   }
   
   createTeamsArr() {
     let teamsArray:any = this.rawTeamsArr
+    this.teams = []
     for (let teamObj of teamsArray) {
       let team:Team = {
         key: teamObj.Key,
@@ -96,48 +112,48 @@ export class ScheduleComponent implements OnInit {
       }
       this.teams.push(team)
     }
-    console.log('teams', this.teams)
+    console.log('teams:', this.teams)
     this.getScoresArray()
   }
 
   getScoresArray() {
     let scheduleArray:any = this.schedule
-    console.log('scheduleArr', scheduleArray)
-    console.log('teams', this.teams)
+    console.log(scheduleArray)
+    this.games = []
     for (let gameObj of scheduleArray) {
-      let game:Game = { 
-        season: gameObj.Season,
-        week: gameObj.Week,
-        dateTime: gameObj.DateTime,
-        longDate: new Date(gameObj.DateTime),
-        date: new Date(gameObj.DateTime).getDate(),
-        day: this.weekday[new Date(gameObj.DateTime).getDay()],
-        month: this.monthNames[new Date(gameObj.DateTime).getMonth()],
-        homeTeamAbbr: gameObj.HomeTeam,
-        homeTeam: this.teams[this.teams.findIndex(x => x.teamID === gameObj.HomeTeamID )].name,
-        homeTeamID: gameObj.HomeTeamID,
-        homeScore: gameObj.HomeScore,
-        homeImg: this.teams[this.teams.findIndex(x => x.teamID === gameObj.HomeTeamID )].wikipediaLogoUrl,
-        homeWins: this.teams[this.teams.findIndex(x => x.teamID === gameObj.HomeTeamID )].wins,
-        homeLosses: this.teams[this.teams.findIndex(x => x.teamID === gameObj.HomeTeamID )].losses,
-        awayTeamAbbr: gameObj.AwayTeam,
-        awayTeam: this.teams[this.teams.findIndex(x => x.teamID === gameObj.AwayTeamID )].name,
-        awayScore: gameObj.AwayScore,
-        awayTeamID: gameObj.AwayTeamID,
-        awayImg: this.teams[this.teams.findIndex(x => x.teamID === gameObj.AwayTeamID )].wikipediaLogoUrl,
-        awayWins: this.teams[this.teams.findIndex(x => x.teamID === gameObj.AwayTeamID )].wins,
-        awayLosses: this.teams[this.teams.findIndex(x => x.teamID === gameObj.AwayTeamID )].losses,
-        hasStarted: gameObj.HasStarted,
-        isInProgress: gameObj.IsInProgress,
-        isOver: gameObj.IsOver,
-        stadium: gameObj.StadiumDetails.Name, 
-        stadiumCity: gameObj.StadiumDetails.City,
-        channel: gameObj.Channel,
-        forecastDescription: gameObj.ForecastDescription
+      if(!gameObj.isOver) {
+        // console.log(this.teams[this.teams.findIndex(x => x.teamID === gameObj.HomeTeamID )].name)
+        let game:Game = { 
+          season: gameObj.Season,
+          week: gameObj.Week,
+          dateTime: gameObj.DateTime,
+          longDate: new Date(gameObj.DateTime),
+          date: new Date(gameObj.DateTime).getDate(),
+          day: this.weekday[new Date(gameObj.DateTime).getDay()],
+          month: this.monthNames[new Date(gameObj.DateTime).getMonth()],
+          homeTeamAbbr: gameObj.HomeTeam,
+          homeTeam: this.teams[this.teams.findIndex(x => x.teamID === gameObj.HomeTeamID )].name ?? "",
+          homeTeamID: gameObj.HomeTeamID,
+          homeScore: gameObj.HomeScore,
+          homeImg: this.teams[this.teams.findIndex(x => x.teamID === gameObj.HomeTeamID )].wikipediaLogoUrl,
+          homeWins: this.teams[this.teams.findIndex(x => x.teamID === gameObj.HomeTeamID )].wins,
+          homeLosses: this.teams[this.teams.findIndex(x => x.teamID === gameObj.HomeTeamID )].losses,
+          awayTeamAbbr: gameObj.AwayTeam,
+          awayTeam: this.teams[this.teams.findIndex(x => x.teamID === gameObj.AwayTeamID )].name,
+          awayScore: gameObj.AwayScore,
+          awayTeamID: gameObj.AwayTeamID,
+          awayImg: this.teams[this.teams.findIndex(x => x.teamID === gameObj.AwayTeamID )].wikipediaLogoUrl,
+          awayWins: this.teams[this.teams.findIndex(x => x.teamID === gameObj.AwayTeamID )].wins,
+          awayLosses: this.teams[this.teams.findIndex(x => x.teamID === gameObj.AwayTeamID )].losses,
+          hasStarted: gameObj.HasStarted,
+          isInProgress: gameObj.IsInProgress,
+          isOver: gameObj.IsOver,
+          channel: gameObj.Channel
+        }
+        this.games.push(game)
       }
-      this.games.push(game)
-  
     }
+    console.log(this.games)
     this.sendGameList()
   }
 

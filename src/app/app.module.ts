@@ -9,8 +9,6 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { HomeComponent } from './home/home.component';
 import { NflComponent } from './nfl/nfl.component';
-import { NbaComponent } from './nba/nba.component';
-import { MlbComponent } from './mlb/mlb.component';
 import { ScheduleComponent } from './schedule/schedule.component';
 import { StandingsComponent } from './standings/standings.component';
 import { TeamComponent } from './team/team.component';
@@ -27,8 +25,6 @@ import { SearchFilterPipe } from './search-filter.pipe';
     AppComponent,
     HomeComponent,
     NflComponent,
-    NbaComponent,
-    MlbComponent,
     ScheduleComponent,
     StandingsComponent,
     TeamComponent,

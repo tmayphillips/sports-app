@@ -6,8 +6,9 @@ import { TeamComponent } from './team/team.component';
 
 const routes: Routes = [
   { path: '', component: PlayerSearchComponent },
-  { path: 'nfl', component: NflComponent },
-  { path: 'team/:teamID/:teamName', component: TeamComponent}
+  { path: 'sport/:sport', component: NflComponent },
+  { path: 'team/:teamID/:teamName', component: TeamComponent},
+  { path: '', redirectTo:'/', pathMatch:'full'}
 ];
 
 @NgModule({

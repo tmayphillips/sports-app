@@ -20,8 +20,6 @@
                 <div class='schedule-wrapper'>
                     <h3>Upcoming Schedule</h3>
                     <ul *ngFor='let game of games'>
-                        <!-- <li *ngIf= 'game.homeTeam === "HOU" || game.awayTeam === "HOU"' >{{game.homeTeam}} vs {{game.awayTeam}}</li> -->
-                        
                         <li *ngIf='!game.isOver'>
                             <div class='row-wrapper'>
                                 <div class='team-wrapper'>
@@ -34,7 +32,7 @@
                                 </div>
                                 <div class='game-info'>
                                     <p>{{game.day}}</p>
-                                    <p>{{game.longDate.toLocaleTimeString("en-US", { hour: '2-digit', minute: '2-digit' })}} ET</p>
+                                    <p>{{game.dateTime}}</p>
                                 </div>
                             </div>
                             <div class='row-wrapper'>
@@ -47,8 +45,8 @@
                                     <p>{{game.awayScore}}</p>
                                 </div>
                                 <div class='game-info'>
+                                    <p>{{game.longDate.toLocaleTimeString("en-US", { hour: '2-digit', minute: '2-digit' })}} ET</p>
                                     <p>{{game.channel}}</p>
-                                    <p>{{game.forecastDescription}}</p>
                                 </div>
                             </div>
                             <div class='separator'></div>
@@ -61,9 +59,19 @@
         </div>
         
         <div class="col-3">
-            <div class='headlines-wrapper'>
-                <news-headlines [query]="sportQuery"></news-headlines>
+            <div class='headline-container'>
+                <!-- <news-headlines [style.display]="'none'" [query]="sportQuery" (articlesEvent)="getArticles($event)"></news-headlines> -->
+                <h3 class='header'>HEADLINES</h3>
+                <div class='separator'></div>
+                <div class='list-wrapper'>
+                    <ul *ngFor='let article of articles | slice : 2-11'>
+                        <li><a href="{{article.url}}"><p class='limit'>{{article.title}}</p></a></li>
+                    </ul>
+                </div>
             </div>
+            <!-- <div class='headlines-wrapper'>
+                <news-headlines [query]="sportQuery" (articlesEvent)="getArticles($event)"></news-headlines>
+            </div> -->
         </div>
         
     </div>
