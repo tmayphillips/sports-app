@@ -2,6 +2,7 @@ import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { Router, ActivatedRoute, ParamMap } from '@angular/router';
 import { ScheduleService } from '../schedule.service';
 import { Team } from '../team';
+import { Headline } from '../headline';
 
 @Component({
   selector: 'team',
@@ -17,6 +18,7 @@ export class TeamComponent implements OnInit {
   sport:string = 'nfl'
   teamQuery:string | null = 'sport'
   season:string = ''
+  articles:Headline[] = []
   
   constructor(
     private route: ActivatedRoute,
@@ -102,5 +104,9 @@ export class TeamComponent implements OnInit {
 
   sendTeamsInfo() {
     this.teamsEvent.emit(this.teams)
+  }
+
+  getArticles(articles:Headline[]) {
+    this.articles = articles
   }
 }

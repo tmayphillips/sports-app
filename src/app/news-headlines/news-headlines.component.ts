@@ -11,6 +11,7 @@ export class NewsHeadlinesComponent implements OnInit {
 
   @Input() query:string = ''
   @Output() newsEvent = new EventEmitter<Headline>()
+  @Output() articlesEvent = new EventEmitter<Headline[]>()
 
   constructor(private newsService:NewsService) { }
 
@@ -28,11 +29,16 @@ export class NewsHeadlinesComponent implements OnInit {
       .then((resp:any) => {
         this.articles.push(...resp.articles);
         this.sendNewsItem()
+        this.sendArticles()
       })
   }
 
   sendNewsItem() {
     this.newsEvent.emit(this.articles[1])
+  }
+
+  sendArticles() {
+    this.articlesEvent.emit(this.articles)
   }
 
 }

@@ -1,0 +1,18 @@
+.navbar-container{
+    margin:0;
+    padding:0;
+    font-family: 'PT Sans', sans-serif;
+    display: flex;
+    flex-direction: column;
+    
+}
+
+.navbar-nav {
+    display: flex;
+    flex-direction: row;
+
+}
+
+.navbar-nav li {
+    padding-right: 15px;
+}
