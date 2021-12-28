@@ -6,7 +6,7 @@ export interface Game {
     awayScore:number,
     awayTeamAbbr:string,
     awayTeam:string,
-    awayTeamID:string,
+    awayTeamID:number,
     awayImg:string,
     awayWins:number,
     awayLosses:number
@@ -18,7 +18,7 @@ export interface Game {
     homeScore:number,
     homeTeamAbbr:string,
     homeTeam:string,
-    homeTeamID:string,
+    homeTeamID:number,
     homeImg:string,
     homeWins:number,
     homeLosses:number,

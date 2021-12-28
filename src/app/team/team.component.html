@@ -1,12 +1,14 @@
 <div class="container">
+    <div class='row team-title'>
+        <div class='word-mark'>
+            <img src={{teams[teamIndex].wikipediaWordMarkUrl}} >
+        </div>
+    </div>
     <div class="row ">
         
         <div class="col-8">
             <section class = 'main-content'>
                 <div>
-                    <div class='word-mark'>
-                        <img src={{teams[teamID].wikipediaWordMarkUrl}} >
-                    </div>
                     <news-headlines [style.display]="'none'" [query]="teamQuery" (articlesEvent)="getArticles($event)"></news-headlines>
                     <div class='headline-wrapper' *ngFor='let article of articles'>
                         <a href="{{article.url}}">
@@ -26,7 +28,44 @@
 
         <div class="col-4">
             <div class='standings-wrapper'>
-                
+                <h5>{{teams[teamIndex].conference}} {{teams[teamIndex].division}} Standings</h5>
+                <div class='separator'></div>
+                <div class='standings-list-container' >
+                    <div *ngFor='let team of teams'>
+                        <div class='standings-list' *ngIf='team.conference===teams[teamIndex].conference && team.division===teams[teamIndex].division'>
+                            <p [ngClass]="team.teamID===teams[teamIndex].teamID ? 'active-team' : '' " *ngIf='team.divisionRank===1'>{{team.name}} ({{team.wins}} - {{team.losses}})</p>
+                            <p [ngClass]="team.teamID===teams[teamIndex].teamID ? 'active-team' : '' " *ngIf='team.divisionRank===2'>{{team.name}} ({{team.wins}} - {{team.losses}})</p>
+                            <p [ngClass]="team.teamID===teams[teamIndex].teamID ? 'active-team' : '' " *ngIf='team.divisionRank===3'>{{team.name}} ({{team.wins}} - {{team.losses}})</p>
+                            <p [ngClass]="team.teamID===teams[teamIndex].teamID ? 'active-team' : '' " *ngIf='team.divisionRank===4'>{{team.name}} ({{team.wins}} - {{team.losses}})</p>
+                            <p [ngClass]="team.teamID===teams[teamIndex].teamID ? 'active-team' : '' " *ngIf='team.divisionRank===5'>{{team.name}} ({{team.wins}} - {{team.losses}})</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class='schedule-wrapper'>
+                <schedule [style.display]="'none'" [sport]="sportQuery" (gamesEvent)="getGames($event)"></schedule>
+                <h5>Schedule</h5>
+                    <ul *ngFor='let game of games'>
+                        <li *ngIf='game.awayTeamID===teams[teamIndex].teamID || game.homeTeamID===teams[teamIndex].teamID'>
+                            <div class='separator'></div>
+                            <div class='row-wrapper'>
+                                <h6>{{game.dateTime}}</h6>
+                                <div class='team-wrapper'>
+                                    <img class='logo-xs' src={{game.homeImg}}> 
+                                    <a [routerLink]="['/sport', sportQuery, 'team', game.homeTeamID, game.homeTeam]"><p>{{game.homeTeam}}</p></a>
+                                    vs. 
+                                    <a [routerLink]="['/sport', sportQuery, 'team', game.awayTeamID, game.awayTeam]"><p>{{game.awayTeam}} </p> </a>
+                                    <img class='logo-xs' src={{game.awayImg}}> 
+                                    
+                                </div>
+                                <div *ngIf='game.isInProgress || game.isOver' class='score'>
+                                    <p>{{game.homeScore}} - {{game.awayScore}}</p>
+                                </div>
+                                
+                            </div>
+                            
+                        </li>
+                    </ul>
             </div>
         </div>
     </div>

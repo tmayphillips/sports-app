@@ -1,8 +1,11 @@
-import { Component, OnInit, Output, EventEmitter } from '@angular/core';
-import { Router, ActivatedRoute, ParamMap } from '@angular/router';
+import { Component, OnInit, Output, EventEmitter, ViewChild } from '@angular/core';
+import { Router, ActivatedRoute, ParamMap, NavigationEnd } from '@angular/router';
 import { ScheduleService } from '../schedule.service';
+import { ScheduleComponent } from '../schedule/schedule.component';
 import { Team } from '../team';
 import { Headline } from '../headline';
+import { Game } from '../game';
+import { filter } from 'rxjs';
 
 @Component({
   selector: 'team',
@@ -11,59 +14,69 @@ import { Headline } from '../headline';
 })
 export class TeamComponent implements OnInit {
   @Output() teamsEvent = new EventEmitter<Team[]>()
+  @ViewChild (ScheduleComponent) childSchedule!:ScheduleComponent
+
   rawTeamsArr:string[] = []
   rawStandingsArr:any[] = []
   teams:Team[] = []
-  teamID:string | null = '0'
-  sport:string = 'nfl'
+  teamID:number | null = 0
+  sport:string | null = ''
   teamQuery:string | null = 'sport'
-  season:string = ''
+  season:string|{} = ''
+  year:string = ''
   articles:Headline[] = []
+  games:Game[] = []
+  teamIndex:number = 0
+  sportQuery:string | null = ''
   
   constructor(
+    private router: Router,
     private route: ActivatedRoute,
     private scheduleService:ScheduleService
     ) { }
 
   ngOnInit(): void {
-    this.teamID = this.route.snapshot.paramMap.get('teamID')
+    this.teamID = Number(this.route.snapshot.paramMap.get('teamID'))
     this.teamQuery = this.route.snapshot.paramMap.get('teamName')
-    // this.route.queryParams.subscribe(params => {
-    //   this.teamID = params['teamID']
-    //   this.teamQuery = params['teamName'];
-    // });
-    this.getCurrentSeason(this.sport)
-    console.log(this.teamID)
-    console.log(this.teamQuery)
+    this.sport = this.route.snapshot.paramMap.get('sport')
+    this.sportQuery = this.sport
+    this.getCurrent(this.sport)
+    this.router.events.pipe(filter(event => event instanceof NavigationEnd)).subscribe(
+      () => {
+        this.teamID = Number(this.route.snapshot.paramMap.get('teamID'))
+        this.teamQuery = this.route.snapshot.paramMap.get('teamName')
+        this.sport = this.route.snapshot.paramMap.get('sport')
+        this.sportQuery = this.sport
+        console.log('router event', this.sport)
+        this.childSchedule.getCurrent(this.sportQuery)
+      }
+    )
   }
 
-  getCurrentSeason(sport:string) {
-    if(sport==='nfl') {
-      this.scheduleService
-      .getNflCurrent('Season')
-      .then((resp:any) => {
-        this.season = resp
-        console.log('season', this.season)
-        this.getTeams()
-      })
-    }
+  getCurrent(sport:string|null) {
+    this.season = ''
+    this.scheduleService
+    .getCurrent(sport)
+    .then((resp:any) => {
+      this.season = resp
+      this.getTeams()
+    })
   }
 
   getTeams() {
     this.scheduleService
-      .getNflTeams()
+      .getTeams(this.sport)
       .then((resp:any) => {
-        this.rawTeamsArr.push(...resp);
-        console.log('rawTeamsArr', this.rawTeamsArr)
+        this.rawTeamsArr = resp;
         this.getStandings()
       })
   }
   
   getStandings() {
     this.scheduleService
-      .getNflStandings(this.season)
+      .getStandings(this.sport, this.season)
       .then((resp:any) => {
-        this.rawStandingsArr.push(...resp);
+        this.rawStandingsArr = resp;
         this.createTeamsArr()
       })
   }
@@ -98,7 +111,10 @@ export class TeamComponent implements OnInit {
       }
       this.teams.push(team)
     }
-    console.log('teams', this.teams)
+    this.teams.sort((a,b)=> {
+      return a.conferenceRank - b.conferenceRank
+    })
+    this.teamIndex = this.teams.findIndex(x => x.teamID === this.teamID )
     this.sendTeamsInfo()
   }
 
@@ -108,5 +124,9 @@ export class TeamComponent implements OnInit {
 
   getArticles(articles:Headline[]) {
     this.articles = articles
+  }
+
+  getGames(games:Game[]) {
+    this.games = games
   }
 }

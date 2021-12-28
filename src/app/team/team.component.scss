@@ -13,11 +13,83 @@
     text-align: -webkit-center !important;
 }
 
+.team-title {
+    justify-content: center;
+}
+
 .headline-wrapper  {
     background-color: white;
     border-radius: 10px;
     box-shadow: 0px 2px 2px lightgray;
     margin-bottom: 10px;
+}
+
+
+
+.standings-wrapper {
+    background-color: white;
+    border-radius: 10px;
+    box-shadow: 0px 2px 2px lightgray;
+    margin-bottom: 10px;
+}
+
+.standings-wrapper h5 {
+    text-align: center;
+    padding: 10px;
+    font-weight: bold;
+}
+
+.standings-wrapper .separator {
+    margin-bottom: 1em;
+    margin: 0 15px;
+}
+
+.standings-list-container {
+    padding: 15px 0;
+}
+
+.standings-list p {
+    padding: 0 15px;
+    margin: 0;
+    font-size: 1em;
+}
+
+.standings-list .active-team {
+    font-weight: bold;
+}
+
+.schedule-wrapper {
+    background-color: white;
+    border-radius: 10px;
+    box-shadow: 0px 2px 2px lightgray;
+    margin-bottom: 10px;
+    padding-bottom: 10px;
+}
+
+.schedule-wrapper h5, h6 {
+    text-align: center;
+    padding: 10px;
+    font-weight: bold;
+    margin: 0 !important;
+}
+
+.schedule-wrapper .separator {
+    margin: 0 15px;
+}
+
+.team-wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.team-wrapper p {
+    margin: 0;
+    padding: 0 5px;
+}
+
+.score p {
+    text-align: center;
 }
 
 .title-wrapper {
@@ -46,4 +118,12 @@ img {
     
 }
 
+.logo-xs {
+    height: 20px;
+    width: 30px;
+}
 
+ul {
+    padding: 0;
+    margin: 0;
+}

@@ -33,29 +33,15 @@ export class ScheduleComponent implements OnInit {
       this.scheduleService
       .getCurrent(sport)
       .then((resp:any) => {
-        console.log(resp)
         this.season = resp
-        console.log(this.season)
         this.getScheduleArray(this.sport, this.season)
       })
   }
-
-  // getCurrentSeason(sport:string|null) {
-  //   if(sport==='nfl') {
-  //     this.scheduleService
-  //     .getNflCurrent('Season')
-  //     .then((resp:any) => {
-  //       this.season = resp
-  //       this.getScheduleArray(this.season)
-  //     })
-  //   }
-  // }
 
   getScheduleArray(sport:string|null, season:string|{}) {
     this.scheduleService
       .getSchedule(this.sport, season)
       .then((resp:any) => {
-        console.log(resp)
         this.schedule= resp;
         this.getTeams()
       })
@@ -112,13 +98,11 @@ export class ScheduleComponent implements OnInit {
       }
       this.teams.push(team)
     }
-    console.log('teams:', this.teams)
     this.getScoresArray()
   }
 
   getScoresArray() {
     let scheduleArray:any = this.schedule
-    console.log(scheduleArray)
     this.games = []
     for (let gameObj of scheduleArray) {
       if(!gameObj.isOver) {
@@ -153,7 +137,6 @@ export class ScheduleComponent implements OnInit {
         this.games.push(game)
       }
     }
-    console.log(this.games)
     this.sendGameList()
   }
 
@@ -164,5 +147,4 @@ export class ScheduleComponent implements OnInit {
   sendGameList() {
     this.gamesEvent.emit(this.games)
   }
-
 }

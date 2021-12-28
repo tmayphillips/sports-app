@@ -1,16 +1,10 @@
 <div class='list-wrapper'>
-    <!-- <team (teamsEvent)="getTeamInfo($event)" [style.display]="'none'"></team> -->
     <ul *ngFor='let game of games'>
-        <!-- <li *ngIf= 'game.homeTeam === "HOU" || game.awayTeam === "HOU"' >{{game.homeTeam}} vs {{game.awayTeam}}</li> -->
         <li *ngIf='!game.isOver'>
-
             <img class='logo-sm' src={{game.homeImg}}>
-            {{game.homeTeam}} vs {{game.awayTeam}}
-            
-            
+            {{game.homeTeam}} vs {{game.awayTeam}}            
             <img class='logo-sm' src={{game.awayImg}}>
             {{game.day}}, {{game.month}} {{game.date}} {{game.longDate.toLocaleTimeString("en-US", { hour: '2-digit', minute: '2-digit' })}}
         </li>
     </ul>
-    <!-- <p>{{teams[0].key}}</p> -->
 </div>

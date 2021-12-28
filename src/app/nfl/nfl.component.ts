@@ -26,27 +26,17 @@ export class NflComponent implements OnInit {
     private route: ActivatedRoute
     ) { }
 
-  ngAfterViewInit() {
-    console.log('ngAfter sport', this.sport)
-    // this.childNewsHeadlines.getNews(this.sport)
-    // this.childSchedule.getCurrent(this.sport)
-  }
-
   ngOnChange(): void {
     console.log('onChange')
   }
 
   ngOnInit(): void {
-    // this.router.routeReuseStrategy.shouldReuseRoute = () => false;
     this.sport = this.route.snapshot.paramMap.get('sport')
     this.sportQuery = this.sport
-    console.log('sport page: ')
-
     this.router.events.pipe(filter(event => event instanceof NavigationEnd)).subscribe(
       () => {
         this.sport = this.route.snapshot.paramMap.get('sport')
         this.sportQuery = this.sport
-        console.log('router event', this.sport)
         this.childNewsHeadlines.getNews(this.sport)
         this.childSchedule.getCurrent(this.sport)
       }
@@ -54,18 +44,15 @@ export class NflComponent implements OnInit {
   }
 
   getHeadline(articles:Headline[]) {
-    console.log('headline', articles)
     this.headline = articles[1]
     this.articles = articles
   }
 
   getArticles(articles:Headline[]) {
-    console.log('articles', articles)
     this.articles = articles
   }
 
   getGames(games:Game[]) {
     this.games = games
   }
-
 }

@@ -70,7 +70,6 @@ export class ScheduleService {
         break;
     }
     
-    console.log('getSchedule', this.season)
     let scheduleUrl = `https://api.sportsdata.io/v3/${sport}/scores/json/${this.gameInfo}/${this.season}?key=${this.API_KEY}`
     return new Promise((resolve,reject) => {
         this.http.get(scheduleUrl).subscribe(
@@ -135,107 +134,4 @@ export class ScheduleService {
         )
     })
   }
-
-
-  public getNflCurrent(currentTimeframe:string) {
-    this.timeframe = currentTimeframe;
-    return new Promise((resolve,reject) => {
-        this.http.get(`${this.nflCurrentUrl}${this.timeframe}?key=${this.NFL_API_KEY}`).subscribe(
-            (res) => {
-                resolve(res);
-            }, (err) => {
-                reject(err)
-            }
-        )
-    })
-  }
-
-  // public getNflSchedule(currentSeason:string) {
-  //   this.season = currentSeason;
-  //   return new Promise((resolve,reject) => {
-  //       this.http.get(`${this.nflScheduleUrl}${this.season}?key=${this.NFL_API_KEY}`).subscribe(
-  //           (res) => {
-  //               resolve(res);
-  //           }, (err) => {
-  //               reject(err)
-  //           }
-  //       )
-  //   })
-  // }
-
-  public getMlbCurrent() {
-    return new Promise((resolve,reject) => {
-        this.http.get(`${this.mlbCurrentUrl}?key=${this.MLB_API_KEY}`).subscribe(
-            (res) => {
-                resolve(res);
-            }, (err) => {
-                reject(err)
-            }
-        )
-    })
-  }
-
-  // public getMlbSchedule(currentSeason:string) {
-  //   this.season = currentSeason;
-  //   return new Promise((resolve,reject) => {
-  //       this.http.get(`${this.mlbScheduleUrl}${this.season}?key=${this.MLB_API_KEY}`).subscribe(
-  //           (res) => {
-  //               resolve(res);
-  //           }, (err) => {
-  //               reject(err)
-  //           }
-  //       )
-  //   })
-  // }
-
-  public getNbaCurrent() {
-    return new Promise((resolve,reject) => {
-        this.http.get(`${this.nbaCurrentUrl}?key=${this.NBA_API_KEY}`).subscribe(
-            (res) => {
-                resolve(res);
-            }, (err) => {
-                reject(err)
-            }
-        )
-    })
-  }
-
-  // public getNbaSchedule(currentSeason:string) {
-  //   this.season = currentSeason;
-  //   return new Promise((resolve,reject) => {
-  //       this.http.get(`${this.nbaScheduleUrl}${this.season}?key=${this.NBA_API_KEY}`).subscribe(
-  //           (res) => {
-  //               resolve(res);
-  //           }, (err) => {
-  //               reject(err)
-  //           }
-  //       )
-  //   })
-  // }
-
-  public getNflTeams() {
-    console.log(`${this.nflTeamsUrl}?key=${this.NFL_API_KEY}`)
-    return new Promise((resolve,reject) => {
-        this.http.get(`${this.nflTeamsUrl}?key=${this.NFL_API_KEY}`).subscribe(
-            (res) => {
-                resolve(res);
-            }, (err) => {
-                reject(err)
-            }
-        )
-    })
-  }
-
-  public getNflStandings(season:string) {
-    return new Promise((resolve,reject) => {
-        this.http.get(`${this.nflStandingsUrl}${season}?key=${this.NFL_API_KEY}`).subscribe(
-            (res) => {
-                resolve(res);
-            }, (err) => {
-                reject(err)
-            }
-        )
-    })
-  }
-
 }

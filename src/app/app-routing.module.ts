@@ -5,9 +5,9 @@ import { NflComponent } from './nfl/nfl.component';
 import { TeamComponent } from './team/team.component';
 
 const routes: Routes = [
-  { path: '', component: PlayerSearchComponent },
+  { path: '', component: NflComponent },
   { path: 'sport/:sport', component: NflComponent },
-  { path: 'team/:teamID/:teamName', component: TeamComponent},
+  { path: 'sport/:sport/team/:teamID/:teamName', component: TeamComponent},
   { path: '', redirectTo:'/', pathMatch:'full'}
 ];
 
