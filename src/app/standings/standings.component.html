@@ -1,1 +1,66 @@
-<p>standings works!</p>
+<div class="container">
+    <div class="row ">
+        <secondary-navbar></secondary-navbar>
+        <div class="col-lg-7 col-md-7 col-sm-12 col-xs-12">
+            <section class = 'main-content'>
+                
+                <div class='standings-wrapper'>
+                    <team [style.display]="'none'" (teamsEvent)="getTeams($event)"></team>
+                    <h3>{{sport | uppercase }} Standings</h3>
+                    <div class='conference-wrapper'>
+                        <a><h5 (click)="toggleConf('afc')">AFC</h5></a>
+                        <a><h5 (click)="toggleConf('nfc')">NFC</h5></a>
+                    </div>
+                    <div class='standings-wrapper'>
+                        <h5>AFC East</h5>
+                        <div class='separator'></div>
+                        <div class='standings-list-container' >
+                            <div *ngFor='let team of teams'>
+                                <div class='standings-list' *ngIf="team.conference==='AFC' && team.division==='East'">
+                                    <p *ngIf='team.divisionRank===1'>{{team.name}} ({{team.wins}} - {{team.losses}})</p>
+                                    <p *ngIf='team.divisionRank===2'>{{team.name}} ({{team.wins}} - {{team.losses}})</p>
+                                    <p *ngIf='team.divisionRank===3'>{{team.name}} ({{team.wins}} - {{team.losses}})</p>
+                                    <p *ngIf='team.divisionRank===4'>{{team.name}} ({{team.wins}} - {{team.losses}})</p>
+                                    <p *ngIf='team.divisionRank===5'>{{team.name}} ({{team.wins}} - {{team.losses}})</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div *ngFor='let team of teams'>
+                        <h3>AFC East</h3>
+                        <div class='standings-list' *ngIf="team.conference==='AFC' && team.division==='East'">
+                            <p>{{team.divisionRank}}</p>
+                            <p *ngIf='team.divisionRank===1'>{{team.name}} ({{team.wins}} - {{team.losses}})</p>
+                            <p *ngIf='team.divisionRank===2'>{{team.name}} ({{team.wins}} - {{team.losses}})</p>
+                            <p *ngIf='team.divisionRank===3'>{{team.name}} ({{team.wins}} - {{team.losses}})</p>
+                            <p *ngIf='team.divisionRank===4'>{{team.name}} ({{team.wins}} - {{team.losses}})</p>
+                        </div>
+                    </div>
+                    
+                </div>
+            </section>
+        </div>
+        <news-headlines [style.display]="'none'" [query]="sportQuery" (newsEvent)="getArticles($event)"></news-headlines>
+        <div class="col-lg-5 col-md-5 col-sm-12 col-xs-12">
+            <div class='headlines-wrapper'>
+                <h3 class='header'>HEADLINES</h3>
+                <div class='separator first-separator'></div>
+                <div class='list-wrapper'>
+                    <ul *ngFor='let article of articles | slice : 1-10'>
+                        <li *ngIf='article.image_url'><a href="{{article.link}}">
+                            <div class='img-wrapper'>
+                                <img class='headline-img' src={{article.image_url}} /> 
+                            </div>
+                            <div class='separator'></div>
+                            <div class='title-wrapper'>
+                                <h4>{{article.title}}</h4>
+                                <!-- <p>{{headline.description}}</p> -->
+                            </div>
+                        </a></li>
+                        <!-- <li><a href="{{article.link}}"><p class='limit'>{{article.title}}</p></a></li> -->
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -122,7 +122,7 @@ export class ScheduleComponent implements OnInit {
     let scheduleArray:any = this.schedule
     this.games = []
     for (let gameObj of scheduleArray) {
-      if(!gameObj.isOver) {
+      if(this.sport === 'nfl') {
         // console.log(this.teams[this.teams.findIndex(x => x.teamID === gameObj.HomeTeamID )].name)
         let game:Game = { 
           season: gameObj.Season,
@@ -142,6 +142,66 @@ export class ScheduleComponent implements OnInit {
           awayTeamAbbr: gameObj.AwayTeam,
           awayTeam: this.teams[this.teams.findIndex(x => x.teamID === gameObj.AwayTeamID )].name,
           awayScore: gameObj.AwayScore,
+          awayTeamID: gameObj.AwayTeamID,
+          awayImg: this.teams[this.teams.findIndex(x => x.teamID === gameObj.AwayTeamID )].wikipediaLogoUrl,
+          awayWins: this.teams[this.teams.findIndex(x => x.teamID === gameObj.AwayTeamID )].wins,
+          awayLosses: this.teams[this.teams.findIndex(x => x.teamID === gameObj.AwayTeamID )].losses,
+          hasStarted: gameObj.HasStarted,
+          isInProgress: gameObj.IsInProgress,
+          isOver: gameObj.IsOver,
+          channel: gameObj.Channel
+        }
+        this.games.push(game)
+      }
+      if(this.sport === 'nba') {
+        let game:Game = { 
+          season: gameObj.Season,
+          week: gameObj.Week,
+          dateTime: gameObj.DateTime,
+          longDate: new Date(gameObj.DateTime),
+          date: new Date(gameObj.DateTime).getDate(),
+          day: this.weekday[new Date(gameObj.DateTime).getDay()],
+          month: this.monthNames[new Date(gameObj.DateTime).getMonth()],
+          homeTeamAbbr: gameObj.HomeTeam,
+          homeTeam: this.teams[this.teams.findIndex(x => x.teamID === gameObj.HomeTeamID )].name ?? "",
+          homeTeamID: gameObj.HomeTeamID,
+          homeScore: gameObj.HomeTeamScore,
+          homeImg: this.teams[this.teams.findIndex(x => x.teamID === gameObj.HomeTeamID )].wikipediaLogoUrl,
+          homeWins: this.teams[this.teams.findIndex(x => x.teamID === gameObj.HomeTeamID )].wins,
+          homeLosses: this.teams[this.teams.findIndex(x => x.teamID === gameObj.HomeTeamID )].losses,
+          awayTeamAbbr: gameObj.AwayTeam,
+          awayTeam: this.teams[this.teams.findIndex(x => x.teamID === gameObj.AwayTeamID )].name,
+          awayScore: gameObj.AwayTeamScore,
+          awayTeamID: gameObj.AwayTeamID,
+          awayImg: this.teams[this.teams.findIndex(x => x.teamID === gameObj.AwayTeamID )].wikipediaLogoUrl,
+          awayWins: this.teams[this.teams.findIndex(x => x.teamID === gameObj.AwayTeamID )].wins,
+          awayLosses: this.teams[this.teams.findIndex(x => x.teamID === gameObj.AwayTeamID )].losses,
+          hasStarted: gameObj.HasStarted,
+          isInProgress: gameObj.IsInProgress,
+          isOver: gameObj.IsOver,
+          channel: gameObj.Channel
+        }
+        this.games.push(game)
+      }
+      if(this.sport === 'mlb') {
+        let game:Game = { 
+          season: gameObj.Season,
+          week: gameObj.Week,
+          dateTime: gameObj.DateTime,
+          longDate: new Date(gameObj.DateTime),
+          date: new Date(gameObj.DateTime).getDate(),
+          day: this.weekday[new Date(gameObj.DateTime).getDay()],
+          month: this.monthNames[new Date(gameObj.DateTime).getMonth()],
+          homeTeamAbbr: gameObj.HomeTeam,
+          homeTeam: this.teams[this.teams.findIndex(x => x.teamID === gameObj.HomeTeamID )].name ?? "",
+          homeTeamID: gameObj.HomeTeamID,
+          homeScore: gameObj.HomeTeamRuns,
+          homeImg: this.teams[this.teams.findIndex(x => x.teamID === gameObj.HomeTeamID )].wikipediaLogoUrl,
+          homeWins: this.teams[this.teams.findIndex(x => x.teamID === gameObj.HomeTeamID )].wins,
+          homeLosses: this.teams[this.teams.findIndex(x => x.teamID === gameObj.HomeTeamID )].losses,
+          awayTeamAbbr: gameObj.AwayTeam,
+          awayTeam: this.teams[this.teams.findIndex(x => x.teamID === gameObj.AwayTeamID )].name,
+          awayScore: gameObj.AwayTeamRuns,
           awayTeamID: gameObj.AwayTeamID,
           awayImg: this.teams[this.teams.findIndex(x => x.teamID === gameObj.AwayTeamID )].wikipediaLogoUrl,
           awayWins: this.teams[this.teams.findIndex(x => x.teamID === gameObj.AwayTeamID )].wins,

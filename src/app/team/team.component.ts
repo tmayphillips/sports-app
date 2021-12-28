@@ -47,8 +47,9 @@ export class TeamComponent implements OnInit {
         this.teamQuery = this.route.snapshot.paramMap.get('teamName')
         this.sport = this.route.snapshot.paramMap.get('sport')
         this.sportQuery = this.sport
-        console.log('router event', this.sport)
+        console.log('router event', this.sport, this.teamID)
         this.childSchedule.getCurrent(this.sportQuery)
+        this.getCurrent(this.sport)
       }
     )
   }

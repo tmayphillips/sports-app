@@ -2,12 +2,6 @@
     height: 30px;
 }
 
-.row-wrapper {
-    display:flex;
-    justify-content: space-between;
-    align-items: center;
-}
-
 ul {
     padding-right: 32px;
 }
@@ -107,6 +101,11 @@ a:hover {
     padding-top: 0.4em;
 }
 
+.schedule-wrapper .separator {
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
 .row-wrapper {
     display:flex;
     justify-content: space-between;
@@ -136,6 +135,7 @@ li h5 {
 
 .wins-losses {
     padding-left: 10px;
+    white-space: nowrap;
 }
 
 img {

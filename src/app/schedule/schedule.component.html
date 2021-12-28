@@ -1,13 +1,14 @@
 <div class="container">
     <div class="row ">
-        <secondary-navbar></secondary-navbar>
-        <div class="col-lg-7 col-md-7 col-sm-12 col-xs-12">
+        <!-- <secondary-navbar></secondary-navbar> -->
+        <div class="col-lg-8 col-md-8 col-sm-12 col-xs-12">
             <section class = 'main-content'>
                 
                 <div class='schedule-wrapper'>
                     <h3>Upcoming {{sport | uppercase }} Schedule</h3>
                     <ul *ngFor='let game of games'>
                         <li *ngIf='!game.isOver'>
+                            <div class='separator'></div>
                             <div class='row-wrapper'>
                                 <div class='team-wrapper'>
                                     <img class='logo-sm' src={{game.homeImg}}> 
@@ -36,17 +37,16 @@
                                     <p>{{game.channel}}</p>
                                 </div>
                             </div>
-                            <div class='separator'></div>
+                            
                         </li>
                     </ul>
                 </div>
             </section>
         </div>
         <news-headlines [style.display]="'none'" [query]="sportQuery" (newsEvent)="getArticles($event)"></news-headlines>
-        <div class="col-lg-5 col-md-5 col-sm-12 col-xs-12">
+        <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
             <div class='headlines-wrapper'>
                 <h3 class='header'>HEADLINES</h3>
-                <div class='separator first-separator'></div>
                 <div class='list-wrapper'>
                     <ul *ngFor='let article of articles | slice : 1-10'>
                         <li *ngIf='article.image_url'><a href="{{article.link}}">
