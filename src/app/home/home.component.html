@@ -1,17 +1,62 @@
 <div class="container">
     <div class="row ">
         <!-- <secondary-navbar></secondary-navbar> -->
-        <div class="col-9 ">
+        <div class="col-lg-8 col-md-12 col-sm-12 col-xs-12">
             <section class = 'main-content'>
+                <div class='headline-wrapper'>
+                    <a href="{{headline.link}}">
+                        <div class='img-wrapper'>
+                            <img src={{headline.image_url}} /> 
+                        </div>
+                        <div class='separator'></div>
+                        <div class='title-wrapper'>
+                            <h2>{{headline.title}}</h2>
+                            <p>{{headline.description}}</p>
+                        </div>
+                        
+                    </a>
+                </div>
+                <div class='wrapper'>
+                    <a href="https://www.espn.com/watch/">
+                        <div class='img-wrapper'>
+                            <img src='../../assets/video-player.jpeg'>
+                        </div>
+                        <div class='separator'></div>
+                        <div class='info'>
+                            <h4>Watch all your favorite sports!</h4>
+                            <p>ESPN hosts a multitude of live games, replays, original show, and much more.</p>
+                        </div>
+                    </a>
+                </div>
+                
+                <!-- <div class='schedule-wrapper'>
+                    <h3>NFL Schedule</h3>
+                    <schedule [sport]="nflQuery" (gamesEvent)="getGames($event)"></schedule>
+                </div>
+                <div class='schedule-wrapper'>
+                    <h3>NBA Schedule</h3>
+                    <schedule [sport]="nbaQuery" (gamesEvent)="getGames($event)"></schedule>
+                </div> -->
             </section>  
         </div>
-        <div class="col-3">
+        <div class="col-lg-4 col-md-12 col-sm-12 col-xs-12">
+            <news-headlines [style.display]="'none'" [query]="sportQuery" (newsEvent)="getArticles($event)"></news-headlines>
             <div class='headlines-wrapper'>
                 <h3 class='header'>HEADLINES</h3>
-                <div class='separator'></div>
+                <div class='separator first-separator'></div>
                 <div class='list-wrapper'>
-                    <ul *ngFor='let article of articles | slice : 2-11'>
-                        <li><a href="{{article.link}}"><p class='limit'>{{article.title}}</p></a></li>
+                    <ul *ngFor='let article of articles | slice : 2-10'>
+                        <li *ngIf='article.image_url'><a href="{{article.link}}">
+                            <div class='img-wrapper'>
+                                <img class='headline-img' src={{article.image_url}} /> 
+                            </div>
+                            <div class='separator'></div>
+                            <div class='title-wrapper'>
+                                <h4>{{article.title}}</h4>
+                                <!-- <p>{{headline.description}}</p> -->
+                            </div>
+                        </a></li>
+                        <!-- <li><a href="{{article.link}}"><p class='limit'>{{article.title}}</p></a></li> -->
                     </ul>
                 </div>
             </div>

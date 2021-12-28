@@ -2,6 +2,9 @@ import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { ScheduleService } from '../schedule.service';
 import { Game } from '../game';
 import { Team } from '../team';
+import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
+import { filter } from 'rxjs';
+import { Headline } from '../headline';
 
 @Component({
   selector: 'schedule',
@@ -9,9 +12,14 @@ import { Team } from '../team';
   styleUrls: ['./schedule.component.scss']
 })
 export class ScheduleComponent implements OnInit {
-  @Input() sport:string = ''
+  @Input() sport:string | null = ''
   @Output() gamesEvent = new EventEmitter<Game[]>()
-  constructor(private scheduleService:ScheduleService) { }
+  constructor(
+    private router: Router,
+    private route: ActivatedRoute,
+    private scheduleService:ScheduleService
+  ) { }
+  sportQuery:string | null = ''
   season:string|{} = ''
   schedule:string[] = []
   date:string = ''
@@ -22,8 +30,17 @@ export class ScheduleComponent implements OnInit {
   rawStandingsArr:any[] = []
   weekday:string[] = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday']
   monthNames:string[] = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"]
-
+  articles: Array<Headline> = []
+  
   ngOnInit(): void {
+    this.sport = this.route.snapshot.paramMap.get('sport')
+    this.sportQuery = this.sport
+    this.router.events.pipe(filter(event => event instanceof NavigationEnd)).subscribe(
+      () => {
+        this.sport = this.route.snapshot.paramMap.get('sport')
+        this.sportQuery = this.sport
+      }
+    )
     this.getCurrent(this.sport)
   }
 
@@ -146,5 +163,9 @@ export class ScheduleComponent implements OnInit {
   
   sendGameList() {
     this.gamesEvent.emit(this.games)
+  }
+
+  getArticles(articles:Headline[]) {
+    this.articles = articles
   }
 }

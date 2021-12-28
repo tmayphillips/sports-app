@@ -1,10 +1,68 @@
-<div class='list-wrapper'>
-    <ul *ngFor='let game of games'>
-        <li *ngIf='!game.isOver'>
-            <img class='logo-sm' src={{game.homeImg}}>
-            {{game.homeTeam}} vs {{game.awayTeam}}            
-            <img class='logo-sm' src={{game.awayImg}}>
-            {{game.day}}, {{game.month}} {{game.date}} {{game.longDate.toLocaleTimeString("en-US", { hour: '2-digit', minute: '2-digit' })}}
-        </li>
-    </ul>
+<div class="container">
+    <div class="row ">
+        <secondary-navbar></secondary-navbar>
+        <div class="col-lg-7 col-md-7 col-sm-12 col-xs-12">
+            <section class = 'main-content'>
+                
+                <div class='schedule-wrapper'>
+                    <h3>Upcoming {{sport | uppercase }} Schedule</h3>
+                    <ul *ngFor='let game of games'>
+                        <li *ngIf='!game.isOver'>
+                            <div class='row-wrapper'>
+                                <div class='team-wrapper'>
+                                    <img class='logo-sm' src={{game.homeImg}}> 
+                                    <a [routerLink]="['/sport', sportQuery, 'team', game.homeTeamID, game.homeTeam]"><h5>{{game.homeTeam}}</h5></a>
+                                    <p class='wins-losses'>({{game.homeWins}} - {{game.homeLosses}})</p>
+                                </div>
+                                <div *ngIf='game.isInProgress' class='score'>
+                                    <p>{{game.homeScore}}</p>
+                                </div>
+                                <div class='game-info'>
+                                    <p>{{game.day}}</p>
+                                    <p>{{game.month}} {{game.date}}</p>
+                                </div>
+                            </div>
+                            <div class='row-wrapper'>
+                                <div class='team-wrapper'>
+                                    <img class='logo-sm' src={{game.awayImg}}> 
+                                    <a [routerLink]="['/sport', sportQuery, 'team', game.awayTeamID, game.awayTeam]"><h5>{{game.awayTeam}} </h5> </a>
+                                    <p class='wins-losses'>({{game.awayWins}} - {{game.awayLosses}})</p>
+                                </div>
+                                <div *ngIf='game.isInProgress' class='score'>
+                                    <p>{{game.awayScore}}</p>
+                                </div>
+                                <div class='game-info'>
+                                    <p>{{game.longDate.toLocaleTimeString("en-US", { hour: '2-digit', minute: '2-digit' })}} ET</p>
+                                    <p>{{game.channel}}</p>
+                                </div>
+                            </div>
+                            <div class='separator'></div>
+                        </li>
+                    </ul>
+                </div>
+            </section>
+        </div>
+        <news-headlines [style.display]="'none'" [query]="sportQuery" (newsEvent)="getArticles($event)"></news-headlines>
+        <div class="col-lg-5 col-md-5 col-sm-12 col-xs-12">
+            <div class='headlines-wrapper'>
+                <h3 class='header'>HEADLINES</h3>
+                <div class='separator first-separator'></div>
+                <div class='list-wrapper'>
+                    <ul *ngFor='let article of articles | slice : 1-10'>
+                        <li *ngIf='article.image_url'><a href="{{article.link}}">
+                            <div class='img-wrapper'>
+                                <img class='headline-img' src={{article.image_url}} /> 
+                            </div>
+                            <div class='separator'></div>
+                            <div class='title-wrapper'>
+                                <h4>{{article.title}}</h4>
+                                <!-- <p>{{headline.description}}</p> -->
+                            </div>
+                        </a></li>
+                        <!-- <li><a href="{{article.link}}"><p class='limit'>{{article.title}}</p></a></li> -->
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>

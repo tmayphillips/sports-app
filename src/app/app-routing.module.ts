@@ -4,12 +4,16 @@ import { PlayerSearchComponent } from './player-search/player-search.component';
 import { NflComponent } from './nfl/nfl.component';
 import { TeamComponent } from './team/team.component';
 import { HomeComponent } from './home/home.component';
+import { ScheduleComponent } from './schedule/schedule.component';
+import { StandingsComponent } from './standings/standings.component';
 
 const routes: Routes = [
-  { path: 'home', component: HomeComponent },
+  { path: '', component: HomeComponent },
   { path: 'sport/:sport', component: NflComponent },
   { path: 'sport/:sport/team/:teamID/:teamName', component: TeamComponent},
-  { path: '', redirectTo:'/sport/nfl', pathMatch:'full'}
+  { path: 'sport/:sport/schedule', component: ScheduleComponent},
+  { path: 'sport/:sport/standings', component: StandingsComponent},
+  { path: '', redirectTo:'', pathMatch:'full'}
 ];
 
 @NgModule({

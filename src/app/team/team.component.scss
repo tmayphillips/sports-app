@@ -74,7 +74,15 @@
 }
 
 .schedule-wrapper .separator {
-    margin: 0 15px;
+    margin: 10px 15px 0px 15px;
+}
+
+.schedule-wrapper p {
+    margin:0;
+}
+
+.schedule-wrapper a:hover {
+    color:blue;
 }
 
 .team-wrapper {
@@ -88,8 +96,17 @@
     padding: 0 5px;
 }
 
+.score {
+    display:flex;
+    justify-content: center;
+}
+
 .score p {
     text-align: center;
+}
+
+.score .active {
+    font-weight: bold;
 }
 
 .title-wrapper {
@@ -131,4 +148,8 @@ ul {
 a {
     text-decoration: none;
     color: black;
+}
+
+.dash {
+    padding: 0 3px;
 }
