@@ -3,9 +3,10 @@ import { RouterModule, Routes } from '@angular/router';
 import { PlayerSearchComponent } from './player-search/player-search.component';
 import { NflComponent } from './nfl/nfl.component';
 import { TeamComponent } from './team/team.component';
+import { HomeComponent } from './home/home.component';
 
 const routes: Routes = [
-  
+  { path: 'home', component: HomeComponent },
   { path: 'sport/:sport', component: NflComponent },
   { path: 'sport/:sport/team/:teamID/:teamName', component: TeamComponent},
   { path: '', redirectTo:'/sport/nfl', pathMatch:'full'}

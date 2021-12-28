@@ -1,1 +1,20 @@
-<p>home works!</p>
+<div class="container">
+    <div class="row ">
+        <!-- <secondary-navbar></secondary-navbar> -->
+        <div class="col-9 ">
+            <section class = 'main-content'>
+            </section>  
+        </div>
+        <div class="col-3">
+            <div class='headlines-wrapper'>
+                <h3 class='header'>HEADLINES</h3>
+                <div class='separator'></div>
+                <div class='list-wrapper'>
+                    <ul *ngFor='let article of articles | slice : 2-11'>
+                        <li><a href="{{article.url}}"><p class='limit'>{{article.title}}</p></a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

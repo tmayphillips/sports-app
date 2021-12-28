@@ -38,6 +38,15 @@ export class NewsHeadlinesComponent implements OnInit {
   }
 
   getNews(query:string | null) {
+    if (query === 'mlb') {
+      query = 'mlb baseball'
+    }
+    if (query ==='nfl') {
+      query = 'nfl football'
+    }
+    if (query === 'nba') {
+      query = 'nba basketball'
+    }
     this.articles = []
     this.newsService
       .getNewsQuery(query)
