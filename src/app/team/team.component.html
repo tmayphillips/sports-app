@@ -49,7 +49,7 @@
                         <li *ngIf='game.awayTeamID===teams[teamIndex].teamID || game.homeTeamID===teams[teamIndex].teamID'>
                             <div class='separator'></div>
                             <div class='row-wrapper'>
-                                <h6>{{game.dateTime}}</h6>
+                                <h6>{{game.day}}, {{game.month}} {{game.date}} {{game.longDate.toLocaleTimeString("en-US", { hour: '2-digit', minute: '2-digit' })}} ET</h6>
                                 <div class='team-wrapper'>
                                     <img class='logo-xs' src={{game.homeImg}}> 
                                     <a [routerLink]="['/sport', sportQuery, 'team', game.homeTeamID, game.homeTeam]"><p>{{game.homeTeam}}</p></a>
