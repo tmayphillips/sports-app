@@ -44,7 +44,12 @@ export class NflComponent implements OnInit {
   }
 
   getHeadline(articles:Headline[]) {
-    this.headline = articles[1]
+    for(let i = 0; i < articles.length; i++) {
+      if (articles[i].image_url) {
+        this.headline = articles[i]
+        break;
+      }
+    }
     this.articles = articles
   }
 

@@ -38,20 +38,21 @@ export class NewsHeadlinesComponent implements OnInit {
   }
 
   getNews(query:string | null) {
-    if (query === 'mlb') {
-      query = 'mlb baseball'
-    }
-    if (query ==='nfl') {
-      query = 'nfl football'
-    }
-    if (query === 'nba') {
-      query = 'nba basketball'
-    }
+    // if (query === 'mlb') {
+    //   query = 'mlb baseball'
+    // }
+    // if (query ==='nfl') {
+    //   query = 'nfl football'
+    // }
+    // if (query === 'nba') {
+    //   query = 'nba basketball'
+    // }
     this.articles = []
     this.newsService
       .getNewsQuery(query)
       .then((resp:any) => {
-        this.articles = resp.articles;
+        console.log(resp.results)
+        this.articles = resp.results;
         this.sendNewsItem()
         this.sendArticles()
       })
