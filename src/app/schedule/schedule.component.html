@@ -49,9 +49,9 @@
                 <h3 class='header'>HEADLINES</h3>
                 <div class='list-wrapper'>
                     <ul *ngFor='let article of articles | slice : 1-10'>
-                        <li *ngIf='article.image_url'><a href="{{article.link}}">
+                        <li *ngIf='article.image'><a href="{{article.url}}">
                             <div class='img-wrapper'>
-                                <img class='headline-img' src={{article.image_url}} /> 
+                                <img class='headline-img' src={{article.image}} /> 
                             </div>
                             <div class='separator'></div>
                             <div class='title-wrapper'>
@@ -59,7 +59,7 @@
                                 <!-- <p>{{headline.description}}</p> -->
                             </div>
                         </a></li>
-                        <!-- <li><a href="{{article.link}}"><p class='limit'>{{article.title}}</p></a></li> -->
+                        <!-- <li><a href="{{article.url}}"><p class='limit'>{{article.title}}</p></a></li> -->
                     </ul>
                 </div>
             </div>

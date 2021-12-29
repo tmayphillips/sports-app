@@ -12,9 +12,9 @@
                 <div>
                     <news-headlines [style.display]="'none'" [query]="teamQuery" (articlesEvent)="getArticles($event)"></news-headlines>
                     <div class='headline-wrapper' *ngFor='let article of articles'>
-                        <a *ngIf='article.image_url' href="{{article.link}}">
+                        <a *ngIf='article.image' href="{{article.url}}">
                             <div class='img-wrapper'>
-                                <img src={{article.image_url}} /> 
+                                <img src={{article.image}} /> 
                             </div>
                             <div class='separator'></div>
                             <div class='title-wrapper'>

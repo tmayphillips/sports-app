@@ -5,9 +5,9 @@
             <section class = 'main-content'>
                 <news-headlines [style.display]="'none'" [query]="sportQuery" (newsEvent)="getHeadline($event)"></news-headlines>
                 <div class='headline-wrapper'>
-                    <a href="{{headline.link}}">
+                    <a href="{{headline.url}}">
                         <div class='img-wrapper'>
-                            <img src={{headline.image_url}} /> 
+                            <img src={{headline.image}} /> 
                         </div>
                         <div class='separator'></div>
                         <div class='title-wrapper'>
@@ -65,9 +65,9 @@
                 <h3 class='header'>HEADLINES</h3>
                 <div class='list-wrapper'>
                     <ul *ngFor='let article of articles | slice : 2-10'>
-                        <li *ngIf='article.image_url'><a href="{{article.link}}">
+                        <li *ngIf='article.image'><a href="{{article.url}}">
                             <div class='img-wrapper'>
-                                <img class='headline-img' src={{article.image_url}} /> 
+                                <img class='headline-img' src={{article.image}} /> 
                             </div>
                             <div class='separator'></div>
                             <div class='title-wrapper'>
@@ -75,7 +75,7 @@
                                 <!-- <p>{{headline.description}}</p> -->
                             </div>
                         </a></li>
-                        <!-- <li><a href="{{article.link}}"><p class='limit'>{{article.title}}</p></a></li> -->
+                        <!-- <li><a href="{{article.url}}"><p class='limit'>{{article.title}}</p></a></li> -->
                     </ul>
                 </div>
             </div>

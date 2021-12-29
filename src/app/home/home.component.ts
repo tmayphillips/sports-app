@@ -23,7 +23,7 @@ export class HomeComponent implements OnInit {
 
   getArticles(articles:Headline[]) {
     for(let i = 0; i < articles.length; i++) {
-      if (articles[i].image_url) {
+      if (articles[i].image) {
         this.headline = articles[i]
         break;
       }

@@ -51,8 +51,8 @@ export class NewsHeadlinesComponent implements OnInit {
     this.newsService
       .getNewsQuery(query)
       .then((resp:any) => {
-        console.log(resp.results)
-        this.articles = resp.results;
+        console.log(resp)
+        this.articles = resp.articles;
         this.sendNewsItem()
         this.sendArticles()
       })
