@@ -3,7 +3,6 @@ import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
 import { filter } from 'rxjs';
 import { Game } from '../game';
 import { Headline } from '../headline';
-import { ScheduleService } from '../schedule.service';
 import { Team } from '../team';
 
 @Component({
@@ -17,12 +16,15 @@ export class StandingsComponent implements OnInit {
   teams:Team[] = []
   games:Game[] = []
   articles: Array<Headline> = []
-  conference:string = 'afc'
+  conference:string = 'AFC'
+  nflDivisions:string[] = ['East', 'West', 'North', 'South']
+  nbaEasternDivisions:string[] = ['Atlantic', 'Central', 'Southeast']
+  nbaWesternDivisions:string[] = ['Pacific', 'Southwest', 'Northwest']
+  mlbDivisions:string[] = ['East', 'Central', 'West']
 
   constructor(
     private router: Router,
-    private route: ActivatedRoute,
-    private scheduleService:ScheduleService
+    private route: ActivatedRoute
   ) { }
 
   ngOnInit(): void {
@@ -34,6 +36,12 @@ export class StandingsComponent implements OnInit {
         this.sportQuery = this.sport
       }
     )
+    if (this.sport==='nba') {
+      this.conference = "Eastern"
+    } 
+    if (this.sport==='mlb') {
+      this.conference = "AL"
+    }
   }
 
   toggleConf(conf:string) {
@@ -44,9 +52,21 @@ export class StandingsComponent implements OnInit {
 
   getTeams(teams:Team[]) {
     this.teams = teams
+    console.log(this.teams)
   }
 
   getArticles(articles:Headline[]) {
     this.articles = articles
+  }
+
+  getArray():string[] {
+    if (this.conference === 'Eastern') {
+      return this.nbaEasternDivisions
+    } else if (this.conference === 'Western') {
+      return this.nbaWesternDivisions
+    } else {
+      return this.nflDivisions
+    }
+
   }
 }

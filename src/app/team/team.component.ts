@@ -26,7 +26,7 @@ export class TeamComponent implements OnInit {
   year:string = ''
   articles:Headline[] = []
   games:Game[] = []
-  teamIndex:number = 0
+  teamIndex:number = -1
   sportQuery:string | null = ''
   
   constructor(
@@ -48,7 +48,7 @@ export class TeamComponent implements OnInit {
         this.sport = this.route.snapshot.paramMap.get('sport')
         this.sportQuery = this.sport
         console.log('router event', this.sport, this.teamID)
-        this.childSchedule.getCurrent(this.sportQuery)
+        // this.childSchedule.getCurrent(this.sportQuery)
         this.getCurrent(this.sport)
       }
     )
@@ -71,6 +71,7 @@ export class TeamComponent implements OnInit {
         this.rawTeamsArr = resp;
         this.getStandings()
       })
+      
   }
   
   getStandings() {
@@ -84,36 +85,66 @@ export class TeamComponent implements OnInit {
   
   createTeamsArr() {
     let teamsArray:any = this.rawTeamsArr
+    this.teams = []
     for (let teamObj of teamsArray) {
-      let team:Team = {
-        key: teamObj.Key,
-        teamID: teamObj.TeamID,
-        city: teamObj.City,
-        name: teamObj.Name,
-        conference: teamObj.Conference,
-        division: teamObj.Division,
-        wins: this.rawStandingsArr[this.rawStandingsArr.findIndex(x => x.TeamID === teamObj.TeamID )].Wins,
-        losses: this.rawStandingsArr[this.rawStandingsArr.findIndex(x => x.TeamID === teamObj.TeamID )].Losses,
-        ties: this.rawStandingsArr[this.rawStandingsArr.findIndex(x => x.TeamID === teamObj.TeamID )].Ties,
-        conferenceRank: this.rawStandingsArr[this.rawStandingsArr.findIndex(x => x.TeamID === teamObj.TeamID )].ConferenceRank,
-        conferenceWins: this.rawStandingsArr[this.rawStandingsArr.findIndex(x => x.TeamID === teamObj.TeamID )].ConferenceWins,
-        conferenceLosses: this.rawStandingsArr[this.rawStandingsArr.findIndex(x => x.TeamID === teamObj.TeamID )].ConferenceLosses,
-        conferenceTies: this.rawStandingsArr[this.rawStandingsArr.findIndex(x => x.TeamID === teamObj.TeamID )].ConferenceTies,
-        divisionRank: this.rawStandingsArr[this.rawStandingsArr.findIndex(x => x.TeamID === teamObj.TeamID )].DivisionRank,
-        divisionWins: this.rawStandingsArr[this.rawStandingsArr.findIndex(x => x.TeamID === teamObj.TeamID )].DivisionWins,
-        divisionLosses: this.rawStandingsArr[this.rawStandingsArr.findIndex(x => x.TeamID === teamObj.TeamID )].DivisionLosses,
-        divisionTies: this.rawStandingsArr[this.rawStandingsArr.findIndex(x => x.TeamID === teamObj.TeamID )].DivisionTies,
-        fullName: teamObj.FullName,
-        stadiumID: teamObj.StadiumID,
-        primaryColor: teamObj.PrimaryColor,
-        secondaryColor: teamObj.SecondaryColor,
-        wikipediaLogoUrl: teamObj.WikipediaLogoUrl,
-        wikipediaWordMarkUrl: teamObj.WikipediaWordMarkUrl
+      if(this.sport==='mlb') {
+        let team:Team = {
+          key: teamObj.Key,
+          teamID: teamObj.TeamID,
+          city: teamObj.City,
+          name: teamObj.Name,
+          conference: this.rawStandingsArr[this.rawStandingsArr.findIndex(x => x.TeamID === teamObj.TeamID )].League,
+          division: teamObj.Division,
+          wins: this.rawStandingsArr[this.rawStandingsArr.findIndex(x => x.TeamID === teamObj.TeamID )].Wins,
+          losses: this.rawStandingsArr[this.rawStandingsArr.findIndex(x => x.TeamID === teamObj.TeamID )].Losses,
+          ties: this.rawStandingsArr[this.rawStandingsArr.findIndex(x => x.TeamID === teamObj.TeamID )].Ties,
+          conferenceRank: this.rawStandingsArr[this.rawStandingsArr.findIndex(x => x.TeamID === teamObj.TeamID )].ConferenceRank,
+          conferenceWins: this.rawStandingsArr[this.rawStandingsArr.findIndex(x => x.TeamID === teamObj.TeamID )].ConferenceWins,
+          conferenceLosses: this.rawStandingsArr[this.rawStandingsArr.findIndex(x => x.TeamID === teamObj.TeamID )].ConferenceLosses,
+          conferenceTies: this.rawStandingsArr[this.rawStandingsArr.findIndex(x => x.TeamID === teamObj.TeamID )].ConferenceTies,
+          divisionRank: this.rawStandingsArr[this.rawStandingsArr.findIndex(x => x.TeamID === teamObj.TeamID )].DivisionRank,
+          divisionWins: this.rawStandingsArr[this.rawStandingsArr.findIndex(x => x.TeamID === teamObj.TeamID )].DivisionWins,
+          divisionLosses: this.rawStandingsArr[this.rawStandingsArr.findIndex(x => x.TeamID === teamObj.TeamID )].DivisionLosses,
+          divisionTies: this.rawStandingsArr[this.rawStandingsArr.findIndex(x => x.TeamID === teamObj.TeamID )].DivisionTies,
+          fullName: teamObj.FullName,
+          stadiumID: teamObj.StadiumID,
+          primaryColor: teamObj.PrimaryColor,
+          secondaryColor: teamObj.SecondaryColor,
+          wikipediaLogoUrl: teamObj.WikipediaLogoUrl,
+          wikipediaWordMarkUrl: teamObj.WikipediaWordMarkUrl
+        }
+        this.teams.push(team)
+      } else {
+        let team:Team = {
+          key: teamObj.Key,
+          teamID: teamObj.TeamID,
+          city: teamObj.City,
+          name: teamObj.Name,
+          conference: teamObj.Conference,
+          division: teamObj.Division,
+          wins: this.rawStandingsArr[this.rawStandingsArr.findIndex(x => x.TeamID === teamObj.TeamID )].Wins,
+          losses: this.rawStandingsArr[this.rawStandingsArr.findIndex(x => x.TeamID === teamObj.TeamID )].Losses,
+          ties: this.rawStandingsArr[this.rawStandingsArr.findIndex(x => x.TeamID === teamObj.TeamID )].Ties,
+          conferenceRank: this.rawStandingsArr[this.rawStandingsArr.findIndex(x => x.TeamID === teamObj.TeamID )].ConferenceRank,
+          conferenceWins: this.rawStandingsArr[this.rawStandingsArr.findIndex(x => x.TeamID === teamObj.TeamID )].ConferenceWins,
+          conferenceLosses: this.rawStandingsArr[this.rawStandingsArr.findIndex(x => x.TeamID === teamObj.TeamID )].ConferenceLosses,
+          conferenceTies: this.rawStandingsArr[this.rawStandingsArr.findIndex(x => x.TeamID === teamObj.TeamID )].ConferenceTies,
+          divisionRank: this.rawStandingsArr[this.rawStandingsArr.findIndex(x => x.TeamID === teamObj.TeamID )].DivisionRank,
+          divisionWins: this.rawStandingsArr[this.rawStandingsArr.findIndex(x => x.TeamID === teamObj.TeamID )].DivisionWins,
+          divisionLosses: this.rawStandingsArr[this.rawStandingsArr.findIndex(x => x.TeamID === teamObj.TeamID )].DivisionLosses,
+          divisionTies: this.rawStandingsArr[this.rawStandingsArr.findIndex(x => x.TeamID === teamObj.TeamID )].DivisionTies,
+          fullName: teamObj.FullName,
+          stadiumID: teamObj.StadiumID,
+          primaryColor: teamObj.PrimaryColor,
+          secondaryColor: teamObj.SecondaryColor,
+          wikipediaLogoUrl: teamObj.WikipediaLogoUrl,
+          wikipediaWordMarkUrl: teamObj.WikipediaWordMarkUrl
+        }
+        this.teams.push(team)
       }
-      this.teams.push(team)
     }
     this.teams.sort((a,b)=> {
-      return a.conferenceRank - b.conferenceRank
+      return a.divisionRank - b.divisionRank
     })
     this.teamIndex = this.teams.findIndex(x => x.teamID === this.teamID )
     this.sendTeamsInfo()

@@ -1,0 +1,156 @@
+.main-content {
+    display: flex;
+    flex: 1 0 auto;
+    flex-wrap: nowrap;
+    justify-content: space-between;
+    overflow: hidden;
+    flex-direction: column;
+    border-radius: 10px;
+    margin-bottom: 10px;
+    position: relative;
+    transform: translateZ(0);
+    overflow: hidden;
+    text-align: -webkit-center !important;
+}
+
+.standings-wrapper {
+    background-color: white;
+    border-radius: 10px;
+    box-shadow: 0px 2px 2px lightgray;
+    margin-bottom: 10px;
+    padding: 10px;
+}
+
+.standings-table {
+    margin-top: 10px;
+}
+
+.title {
+    justify-content: center;
+}
+
+.headlines-wrapper {
+    background-color: white;
+    border-radius: 10px;
+    box-shadow: 0px 2px 2px lightgray;
+    margin-bottom: 10px;
+    padding: 10px;
+}
+
+.schedule-wrapper .separator {
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+.schedule-wrapper h3 {
+    padding: 10px;
+}
+
+.headlines-wrapper a {
+    text-decoration: none;
+    color:black;
+}
+
+.headlines-wrapper a:hover {
+    color:blue;
+}
+
+.headlines-wrapper .header {
+    padding-top: 10px;
+    text-align: center;
+}
+
+.headlines-wrapper ul {
+    font-size: 12px;
+    padding: 5px;
+    margin: 0 5px;
+}
+
+.headlines-wrapper .separator {
+    margin-bottom: 1em;
+    margin: 0;
+}
+
+.conference-wrapper {
+    display: flex;
+    justify-content: space-between;
+    background: #f1f2f3;
+    border-radius: 50px;
+    width: 240px;
+    margin-bottom: 20px;
+}
+
+.conference-wrapper a {
+    align-self: center;
+}
+
+.active-conference {
+    background-color: white !important;
+    color: red;
+    border-radius: 50px;
+    width: 120px;
+    text-align: center;
+    padding: 5px 15px;
+    margin: 0;
+    box-shadow: 0 1px 8px 0 rgb(0 0 0 / 32%);
+}
+
+.conference {
+    border-radius: 50px;
+    width: 120px;
+    text-align: center;
+    padding: 5px 15px;
+    margin: 0;
+}
+
+.logo-xs {
+    height: 20px;
+    width: 30px;
+}
+
+
+.td-img {
+    max-width:50px;
+    min-width:50px;
+}
+
+.th-name {
+    max-width: 170px;
+    min-width: 170px;
+}
+
+.th-count {
+    max-width: 52px;
+    min-width: 52px;
+    text-align: center;
+}
+
+.td-team {
+    max-width: 120px;
+    min-width: 120px;
+}
+
+.td-count {
+    max-width: 52px;
+    min-width: 52px;
+    text-align: center;
+}
+
+img {
+    width: 100%;
+    height: auto;
+    border-top-right-radius: 10px;
+    border-top-left-radius: 10px;
+}
+
+.img-wrapper{
+    display: block;
+    height: 100%;
+    object-fit: cover;
+    object-position: 50% 0;
+    width: 100%;
+}
+
+.table-wrapper li {
+    list-style-type: none;
+}

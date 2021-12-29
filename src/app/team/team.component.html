@@ -1,6 +1,6 @@
 <div class="container">
     <div class='row team-title'>
-        <div class='word-mark'>
+        <div *ngIf='teams.length > 0 && teamIndex != -1' class='word-mark'>
             <img src={{teams[teamIndex].wikipediaWordMarkUrl}} >
         </div>
     </div>
@@ -27,7 +27,7 @@
         </div>
 
         <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
-            <div class='standings-wrapper'>
+            <div *ngIf='teams.length > 0 && teamIndex != -1' class='standings-wrapper'>
                 <h5>{{teams[teamIndex].conference}} {{teams[teamIndex].division}} Standings</h5>
                 <div class='separator'></div>
                 <div class='standings-list-container' >
@@ -48,7 +48,7 @@
                     </div>
                 </div>
             </div>
-            <div class='schedule-wrapper'>
+            <div class='schedule-wrapper' *ngIf='teams.length > 0 && teamIndex != -1'>
                 <schedule [style.display]="'none'" [sport]="sportQuery" (gamesEvent)="getGames($event)"></schedule>
                 <h5>Schedule</h5>
                     <ul *ngFor='let game of games'>

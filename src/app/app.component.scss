@@ -1,7 +1,8 @@
 .container-fluid{
-    margin:0;
-    padding:0;
+    margin:0 !important;
+    padding:0 !important;
     font-family: 'PT Sans', sans-serif;
+    
 }
 
 .nav-item {
@@ -29,4 +30,8 @@ h1:after {
     height: 44px;
     position: absolute;
     top: 20px
+}
+
+.navbar {
+    padding-bottom: 0px !important;
 }
