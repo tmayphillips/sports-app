@@ -18,10 +18,12 @@
                                 <li>
                                 <table class='standings-table'>
                                     <tr class='table-header'>
-                                        <th class='th-name'>{{division}}</th>
-                                        <th class='th-count'>Wins</th>
-                                        <th class='th-count'>Losses</th>
-                                        <th class='th-count'>Ties</th>
+                                        <div class='th-division'>
+                                            <th class='th-name bold'>{{division}}</th>
+                                            <th class='th-count bold'>Wins</th>
+                                            <th class='th-count bold'>Losses</th>
+                                            <th class='th-count'>Ties</th>
+                                        </div>
                                     </tr>
                                     <div *ngFor='let team of teams'>
                                         <div *ngIf="team.conference===conference && team.division===division" >
@@ -71,9 +73,11 @@
                                 <li>
                                 <table class='standings-table'>
                                     <tr class='table-header'>
-                                        <th class='th-name bold'>{{division}}</th>
-                                        <th class='th-count bold'>Wins</th>
-                                        <th class='th-count bold'>Losses</th>
+                                        <div class='th-division'>
+                                            <th class='th-name bold'>{{division}}</th>
+                                            <th class='th-count bold'>Wins</th>
+                                            <th class='th-count bold'>Losses</th>
+                                        </div>
                                     </tr>
                                     <div *ngFor='let team of teams'>
                                         <div *ngIf="team.conference===conference && team.division===division" >
@@ -126,9 +130,11 @@
                                 <li>
                                 <table class='standings-table'>
                                     <tr class='table-header'>
-                                        <th class='th-name'>{{division}}</th>
-                                        <th class='th-count'>Wins</th>
-                                        <th class='th-count'>Losses</th>
+                                        <div class='th-division'>
+                                            <th class='th-name bold'>{{division}}</th>
+                                            <th class='th-count bold'>Wins</th>
+                                            <th class='th-count bold'>Losses</th>
+                                        </div>
                                     </tr>
                                     <div *ngFor='let team of teams'>
                                         <div *ngIf="team.conference===conference && team.division===division" >
