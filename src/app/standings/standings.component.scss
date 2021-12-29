@@ -11,6 +11,7 @@
     transform: translateZ(0);
     overflow: hidden;
     text-align: -webkit-center !important;
+    width: 100%;
 }
 
 .standings-wrapper {
@@ -115,8 +116,8 @@
 }
 
 .th-name {
-    max-width: 170px;
-    min-width: 170px;
+    max-width: 170px !important;
+    min-width: 170px !important;
 }
 
 .th-count {

@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute, NavigationEnd } from '@angular/router';
 import { filter } from 'rxjs';
+import { Player } from '../players';
 
 @Component({
   selector: 'secondary-navbar',
@@ -9,6 +10,7 @@ import { filter } from 'rxjs';
 })
 export class SecondaryNavbarComponent implements OnInit {
   sport:string | null = ''
+  player:Player = new Player(0,'','','','')
   public scheduleRoute:string = ''
   public standingsRoute:string = ''
 

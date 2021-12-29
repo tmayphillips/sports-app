@@ -1,10 +1,11 @@
 <div class="container">
     <div class="auto-complete">
       <!-- Search Input -->
-      <input #inputSearch class="input-search" type="text" placeholder="Search" [(ngModel)]="query">
+      <input #inputSearch class="input-search" type="text" placeholder="Player Search" [(ngModel)]="query" >
       <!-- Dropdown Menu -->
       <div *ngIf='query' class='search-result drop-doown'>
         <table>
+          <a [routerLink]="['/sport',sport,'player',player.id]">
           <tr class="item" *ngFor='let player of players | searchFilter: query' (click)="onSelectPlayer(player); inputSearch.value=''">
             <td>
               <div class="avatar">
@@ -14,11 +15,12 @@
             <td>{{ player.FirstName }} {{ player.LastName }}</td>
             <td>{{ player.Team }}</td>
           </tr>
+        </a>
         </table>
       </div>
     </div>
   
-    <div *ngIf="playerSelected" class="playerInfo">
+    <!-- <div *ngIf="playerSelected" class="playerInfo">
       <div class='playerInfoRow'>
         <img class='playerImg playerItem' [src]="player.PhotoUrl" alt="avatar" width="65" height="90">
         <div>
@@ -27,7 +29,7 @@
         </div>
       </div>
       <div class='playerInfoRow playerItem'>
-        <h4 class='playerPosition playerItem'>{{ player.position }}</h4>
+        <h4 class='playerPosition playerItem'>{{ player.position }}</h4> -->
         <!-- <h4 class='playerNumber playerItem'>#{{ player.number }}</h4> -->
         <!-- <h5><select class='typeDropdown playerItem' name="fantasyTypeDropdown" #fantasyTypeDropdown (change) = "changeType(fantasyTypeDropdown.value)">
           <option value="regular">Regular</option>
@@ -36,8 +38,8 @@
           <option value="fanduel">Fan Duel</option>
           <option value="ppr">PPR</option>
       </select></h5> -->
-      </div>
-    </div>
+      <!-- </div>
+    </div> -->
   
     <!-- <div *ngIf="playerSelected" >
       <plot [playerID]="player.id" [type]="type"></plot>

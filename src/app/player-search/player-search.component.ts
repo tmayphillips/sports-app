@@ -1,16 +1,20 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
+import { filter } from 'rxjs';
 import { PlayerService } from '../player.service';
 import { Player } from '../players';
 
 @Component({
-  selector: 'app-player-search',
+  selector: 'player-search',
   templateUrl: './player-search.component.html',
   styleUrls: ['./player-search.component.scss']
 })
 export class PlayerSearchComponent implements OnInit {
 
   constructor(
-    private playerService:PlayerService
+    private playerService:PlayerService,
+    private router: Router,
+    private route: ActivatedRoute
   ) { }
   player:Player = new Player(0,'','','','')
   players: Array<any> = []
@@ -18,29 +22,44 @@ export class PlayerSearchComponent implements OnInit {
   playerID:number = 0
   selectedPlayer:string = ''
   playerSelected:boolean = false;
+  sport:string | null = ''
 
   ngOnInit(): void {
+    this.sport = this.route.snapshot.paramMap.get('sport')
+    this.router.events.pipe(filter(event => event instanceof NavigationEnd)).subscribe(
+      () => {
+        this.sport = this.route.snapshot.paramMap.get('sport')
+      }
+    )
     this.getPlayerArray()
+
   }
 
   getPlayerArray() {
     this.playerService
-      .getNflPlayers()
+      .getPlayers(this.sport)
       .then((resp:any) => {
-        this.players.push(...resp);
+        this.players=resp;
+        console.log(this.players)
       })
 
-    this.playerService
-      .getMlbPlayers()
-      .then((resp:any) => {
-        this.players.push(...resp);
-      })
+    // this.playerService
+    //   .getNflPlayers()
+    //   .then((resp:any) => {
+    //     this.players.push(...resp);
+    //   })
 
-    this.playerService
-      .getNbaPlayers()
-      .then((resp:any) => {
-        this.players.push(...resp);
-      })
+    // this.playerService
+    //   .getMlbPlayers()
+    //   .then((resp:any) => {
+    //     this.players.push(...resp);
+    //   })
+
+    // this.playerService
+    //   .getNbaPlayers()
+    //   .then((resp:any) => {
+    //     this.players.push(...resp);
+    //   })
   }
 
   selectPlayer(player:any) {
@@ -48,6 +67,7 @@ export class PlayerSearchComponent implements OnInit {
   }
 
   onSelectPlayer(rawPlayer:any) {
+    console.log(rawPlayer)
     this.query = ''
     let fullTeam:string = ''
     // let abbTeam:string = rawPlayer.Team  

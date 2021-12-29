@@ -1,8 +1,12 @@
 .container-fluid{
     margin:0 !important;
-    padding:0 !important;
+    padding: 0 !important;
     font-family: 'PT Sans', sans-serif;
-    
+}
+
+.navbar {
+    padding: 0px 0 10px 10px !important;
+    background-color: #d00;
 }
 
 .nav-item {
@@ -13,24 +17,24 @@
     height: 30px;
 }
 
-h1:before {
-    background-color: #d00;
-    left: -60px;
-    right: -10px;
-}
+// h1:before {
+//     background-color: #d00;
+//     left: -60px;
+//     right: -10px;
+// }
 
-h1:after {
-    background-color: #b40000;
-    left: -10px;
-    right: -20px;
-    z-index: -1;
-    transform: skew(-25deg, 0);
-    content: '';
-    display:block;
-    height: 44px;
-    position: absolute;
-    top: 20px
-}
+// h1:after {
+//     background-color: #b40000;
+//     left: -10px;
+//     right: -20px;
+//     z-index: -1;
+//     transform: skew(-25deg, 0);
+//     content: '';
+//     display:block;
+//     height: 44px;
+//     position: absolute;
+//     top: 20px
+// }
 
 .navbar {
     padding-bottom: 0px !important;

@@ -1,1 +1,22 @@
-<p>player works!</p>
+<secondary-navbar></secondary-navbar>
+<div *ngIf="playerSelected" class="playerInfo">
+    <div class='playerInfoRow'>
+        <img class='playerImg playerItem' [src]="player.PhotoUrl" alt="avatar" width="65" height="90">
+        <div>
+          <h3 class='playerName playerItem'>{{ player.name }}</h3>
+          <h3 class='playerTeam playerItem'>{{ player.team }}</h3>
+        </div>
+    </div>
+    <div class='playerInfoRow playerItem'>
+        <h4 class='playerPosition playerItem'>{{ player.position }}</h4> 
+       <h5><select class='typeDropdown playerItem' name="fantasyTypeDropdown" #fantasyTypeDropdown (change) = "changeType(fantasyTypeDropdown.value)">
+          <option value="regular">Regular</option>
+          <option value="yahoo">Yahoo</option>
+          <option value="draftkings">Draft Kings</option>
+          <option value="fanduel">Fan Duel</option>
+          <option value="ppr">PPR</option>
+      </select></h5>
+    </div>
+</div> 
+  
+   

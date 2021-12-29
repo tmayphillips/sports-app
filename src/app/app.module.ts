@@ -19,6 +19,7 @@ import { PlayerSearchComponent } from './player-search/player-search.component';
 import { NewsHeadlinesComponent } from './news-headlines/news-headlines.component';
 import { FantasyPlotComponent } from './fantasy-plot/fantasy-plot.component';
 import { SearchFilterPipe } from './search-filter.pipe';
+import { PlotComponent } from './plot/plot.component';
 
 @NgModule({
   declarations: [
@@ -34,7 +35,8 @@ import { SearchFilterPipe } from './search-filter.pipe';
     PlayerSearchComponent,
     NewsHeadlinesComponent,
     FantasyPlotComponent,
-    SearchFilterPipe
+    SearchFilterPipe,
+    PlotComponent
   ],
   imports: [
     BrowserModule,

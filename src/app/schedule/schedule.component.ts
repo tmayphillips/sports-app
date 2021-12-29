@@ -87,7 +87,6 @@ export class ScheduleComponent implements OnInit {
   createTeamsArr() {
     let teamsArray:any = this.rawTeamsArr
     this.teams = []
-    console.log(this.sport)
     for (let teamObj of teamsArray) {
       if(this.sport==='mlb') {
         let team:Team = {
