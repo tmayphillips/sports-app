@@ -183,7 +183,7 @@
                 <h3 class='header'>HEADLINES</h3>
                 <div class='list-wrapper'>
                     <ul *ngFor='let article of articles | slice : 0-10'>
-                        <li *ngIf='article.image_url != null || article.image_url != "\n"'><a href="{{article.link}}">
+                        <li *ngIf='article.image_url'><a href="{{article.link}}">
                             <div class='img-wrapper'>
                                 <img class='headline-img' src={{article.image_url}} /> 
                             </div>

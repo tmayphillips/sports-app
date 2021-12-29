@@ -29,10 +29,10 @@ export class HomeComponent implements OnInit {
       }
     }
     this.articles = articles
+    console.log(this.articles)
   }
 
   getGames(games:Game[]) {
-
     this.games = games
   }
 
