@@ -32,7 +32,6 @@ export class PlayerSearchComponent implements OnInit {
       }
     )
     this.getPlayerArray()
-
   }
 
   getPlayerArray() {
@@ -42,24 +41,6 @@ export class PlayerSearchComponent implements OnInit {
         this.players=resp;
         console.log(this.players)
       })
-
-    // this.playerService
-    //   .getNflPlayers()
-    //   .then((resp:any) => {
-    //     this.players.push(...resp);
-    //   })
-
-    // this.playerService
-    //   .getMlbPlayers()
-    //   .then((resp:any) => {
-    //     this.players.push(...resp);
-    //   })
-
-    // this.playerService
-    //   .getNbaPlayers()
-    //   .then((resp:any) => {
-    //     this.players.push(...resp);
-    //   })
   }
 
   selectPlayer(player:any) {

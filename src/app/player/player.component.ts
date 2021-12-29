@@ -126,6 +126,4 @@ export class PlayerComponent implements OnInit {
         break;
     }
   } 
-  
-
 }

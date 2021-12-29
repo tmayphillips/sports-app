@@ -25,7 +25,6 @@ export class NewsHeadlinesComponent implements OnInit {
 
   ngOnInit(): void {
     this.getNews(this.query)
-
     // this.router.events.pipe(filter(event => event instanceof NavigationEnd)).subscribe(
     //   () => {
     //     this.getNews(this.query)
@@ -38,15 +37,6 @@ export class NewsHeadlinesComponent implements OnInit {
   }
 
   getNews(query:string | null) {
-    // if (query === 'mlb') {
-    //   query = 'mlb baseball'
-    // }
-    // if (query ==='nfl') {
-    //   query = 'nfl football'
-    // }
-    // if (query === 'nba') {
-    //   query = 'nba basketball'
-    // }
     this.articles = []
     this.newsService
       .getNewsQuery(query)
@@ -65,5 +55,4 @@ export class NewsHeadlinesComponent implements OnInit {
   sendArticles() {
     this.articlesEvent.emit(this.articles)
   }
-
 }

@@ -152,7 +152,6 @@ export class ScheduleComponent implements OnInit {
     this.games = []
     for (let gameObj of scheduleArray) {
       if(this.sport === 'nfl') {
-        // console.log(this.teams[this.teams.findIndex(x => x.teamID === gameObj.HomeTeamID )].name)
         let game:Game = { 
           season: gameObj.Season,
           week: gameObj.Week,

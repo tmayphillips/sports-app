@@ -71,7 +71,6 @@ export class TeamComponent implements OnInit {
         this.rawTeamsArr = resp;
         this.getStandings()
       })
-      
   }
   
   getStandings() {

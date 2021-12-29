@@ -32,12 +32,6 @@
                 <h5>{{teams[teamIndex].conference}} {{teams[teamIndex].division}} Standings</h5>
                 <div class='separator'></div>
                 <div class='standings-list-container' >
-                    <!-- <table *ngFor='let team of teams'>
-                        <tr *ngIf='team.conference===teams[teamIndex].conference && team.division===teams[teamIndex].division && team.divisionRank===1'>{{team.name}}</tr>
-                        <tr *ngIf='team.conference===teams[teamIndex].conference && team.division===teams[teamIndex].division && team.divisionRank===2'>{{team.name}}</tr>
-                        <tr *ngIf='team.conference===teams[teamIndex].conference && team.division===teams[teamIndex].division && team.divisionRank===3'>{{team.name}}</tr>
-                        <tr *ngIf='team.conference===teams[teamIndex].conference && team.division===teams[teamIndex].division && team.divisionRank===4'>{{team.name}}</tr>
-                    </table> -->
                     <div *ngFor='let team of teams'>
                         <div class='standings-list' *ngIf='team.conference===teams[teamIndex].conference && team.division===teams[teamIndex].division'>
                             <p [ngClass]="team.teamID===teams[teamIndex].teamID ? 'active-team' : '' " *ngIf='team.divisionRank===1'>{{team.name}} ({{team.wins}} - {{team.losses}})</p>
