@@ -17,7 +17,7 @@
                             <div *ngFor='let division of nflDivisions' class='table-wrapper' >
                                 <li>
                                 <table class='standings-table'>
-                                    <tr>
+                                    <tr class='table-header'>
                                         <th class='th-name'>{{division}}</th>
                                         <th class='th-count'>Wins</th>
                                         <th class='th-count'>Losses</th>
@@ -70,48 +70,42 @@
                             <div *ngFor='let division of getArray()' class='table-wrapper' >
                                 <li>
                                 <table class='standings-table'>
-                                    <tr>
-                                        <th class='th-name'>{{division}}</th>
-                                        <th class='th-count'>Wins</th>
-                                        <th class='th-count'>Losses</th>
-                                        <th class='th-count'>Ties</th>
+                                    <tr class='table-header'>
+                                        <th class='th-name bold'>{{division}}</th>
+                                        <th class='th-count bold'>Wins</th>
+                                        <th class='th-count bold'>Losses</th>
                                     </tr>
                                     <div *ngFor='let team of teams'>
                                         <div *ngIf="team.conference===conference && team.division===division" >
+                                            <tr *ngIf='team.divisionRank===0'>
+                                                <td class='td-img'><img class='logo-xs' src={{team.wikipediaLogoUrl}} ></td>
+                                                <td class='td-team'><a [routerLink]="['/sport', sportQuery, 'team', team.teamID, team.name]">{{team.name}}</a></td>
+                                                <td class='td-count'>{{team.wins}}</td>
+                                                <td class='td-count'>{{team.losses}}</td>
+                                            </tr>
                                             <tr *ngIf='team.divisionRank===1'>
                                                 <td class='td-img'><img class='logo-xs' src={{team.wikipediaLogoUrl}} ></td>
                                                 <td class='td-team'><a [routerLink]="['/sport', sportQuery, 'team', team.teamID, team.name]">{{team.name}}</a></td>
                                                 <td class='td-count'>{{team.wins}}</td>
                                                 <td class='td-count'>{{team.losses}}</td>
-                                                <td class='td-count'>{{team.ties}}</td>
                                             </tr>
                                             <tr *ngIf='team.divisionRank===2'>
                                                 <td class='td-img'><img class='logo-xs' src={{team.wikipediaLogoUrl}} ></td>
                                                 <td class='td-team'><a [routerLink]="['/sport', sportQuery, 'team', team.teamID, team.name]">{{team.name}}</a></td>
                                                 <td class='td-count'>{{team.wins}}</td>
                                                 <td class='td-count'>{{team.losses}}</td>
-                                                <td class='td-count'>{{team.ties}}</td>
                                             </tr>
                                             <tr *ngIf='team.divisionRank===3'>
                                                 <td class='td-img'><img class='logo-xs' src={{team.wikipediaLogoUrl}} ></td>
                                                 <td class='td-team'><a [routerLink]="['/sport', sportQuery, 'team', team.teamID, team.name]">{{team.name}}</a></td>
                                                 <td class='td-count'>{{team.wins}}</td>
                                                 <td class='td-count'>{{team.losses}}</td>
-                                                <td class='td-count'>{{team.ties}}</td>
                                             </tr>
                                             <tr *ngIf='team.divisionRank===4'>
                                                 <td class='td-img'><img class='logo-xs' src={{team.wikipediaLogoUrl}} ></td>
                                                 <td class='td-team'><a [routerLink]="['/sport', sportQuery, 'team', team.teamID, team.name]">{{team.name}}</a></td>
                                                 <td class='td-count'>{{team.wins}}</td>
                                                 <td class='td-count'>{{team.losses}}</td>
-                                                <td class='td-count'>{{team.ties}}</td>
-                                            </tr>
-                                            <tr *ngIf='team.divisionRank===4'>
-                                                <td class='td-img'><img class='logo-xs' src={{team.wikipediaLogoUrl}} ></td>
-                                                <td class='td-team'><a [routerLink]="['/sport', sportQuery, 'team', team.teamID, team.name]">{{team.name}}</a></td>
-                                                <td class='td-count'>{{team.wins}}</td>
-                                                <td class='td-count'>{{team.losses}}</td>
-                                                <td class='td-count'>{{team.ties}}</td>
                                             </tr>
                                         </div>
                                     </div>  
@@ -131,7 +125,7 @@
                             <div *ngFor='let division of mlbDivisions' class='table-wrapper' >
                                 <li>
                                 <table class='standings-table'>
-                                    <tr>
+                                    <tr class='table-header'>
                                         <th class='th-name'>{{division}}</th>
                                         <th class='th-count'>Wins</th>
                                         <th class='th-count'>Losses</th>

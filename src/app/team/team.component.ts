@@ -143,9 +143,16 @@ export class TeamComponent implements OnInit {
         this.teams.push(team)
       }
     }
-    this.teams.sort((a,b)=> {
-      return a.divisionRank - b.divisionRank
-    })
+    if (this.sport === 'mlb') {
+      this.teams.sort((a,b)=> {
+        return a.divisionRank - b.divisionRank
+      })
+    } else {
+      this.teams.sort((a,b)=> {
+        return a.conferenceRank - b.conferenceRank
+      })
+    }
+    
     this.teamIndex = this.teams.findIndex(x => x.teamID === this.teamID )
     this.sendTeamsInfo()
   }
